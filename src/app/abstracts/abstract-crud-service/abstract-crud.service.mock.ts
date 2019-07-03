@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core'
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router'
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs'
+import { first, take, tap } from 'rxjs/operators'
 
 import { IAbstractCrudService, IBaseItem } from './abstract-crud.service'
 
 @Injectable()
 export abstract class AbstractCrudMockService<T extends IBaseItem>
-  implements IAbstractCrudService<T> {
+  implements IAbstractCrudService<T>, Resolve<T[]> {
   readonly list: BehaviorSubject<T[]>
   abstract endpoint: string
   abstract mockData: T[]
@@ -53,5 +55,10 @@ export abstract class AbstractCrudMockService<T extends IBaseItem>
     } else {
       return throwError(400)
     }
+  }
+
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<T[]> {
+    this.fetch()
+    return of(this.mockData)
   }
 }

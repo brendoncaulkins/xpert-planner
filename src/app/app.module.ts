@@ -1,22 +1,37 @@
+import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { BrowserModule } from '@angular/platform-browser'
+import { FlexLayoutModule } from '@angular/flex-layout'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
-import { BioModule } from './bio/bio.module'
+import { BioFormComponent } from './bio-form/bio-form.component'
 import { ErrorComponent } from './error/error.component'
 import { HomeComponent } from './home/home.component'
 import { MaterialModule } from './material.module'
+import { ItemFormComponent } from './plan/item-form/item-form.component'
+import { PlanComponent } from './plan/plan.component'
+import { ReviewComponent } from './review/review.component'
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ErrorComponent],
+  declarations: [
+    AppComponent,
+    BioFormComponent,
+    ErrorComponent,
+    HomeComponent,
+    ItemFormComponent,
+    PlanComponent,
+    ReviewComponent,
+  ],
   imports: [
-    BrowserModule,
+    CommonModule,
     BrowserAnimationsModule,
     MaterialModule,
-    BioModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

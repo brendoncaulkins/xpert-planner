@@ -1,9 +1,9 @@
 import { EventEmitter, OnDestroy } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
 
-import { AbstractForm } from './abstract-form.component'
+import { AbstractFormComponent } from './abstract-form.component'
 
-class BasicAbstractForm extends AbstractForm<any> implements OnDestroy {
+class BasicAbstractForm extends AbstractFormComponent<any> implements OnDestroy {
   constructor() {
     super()
     this.formGroup = this.buildForm()
@@ -19,7 +19,7 @@ class BasicAbstractForm extends AbstractForm<any> implements OnDestroy {
 }
 
 describe('AbstractForm', () => {
-  let abstractForm: AbstractForm<any>
+  let abstractForm: AbstractFormComponent<any>
   beforeEach(() => {
     abstractForm = new BasicAbstractForm()
   })

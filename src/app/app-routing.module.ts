@@ -1,16 +1,28 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
+import { BioFormComponent } from './bio-form/bio-form.component'
 import { ErrorComponent } from './error/error.component'
-import { HomeComponent } from './home/home.component'
+import { PlanComponent } from './plan/plan.component'
+import { ReviewComponent } from './review/review.component'
+import { BaseItemService } from './services/base-item/base-item.service'
 
 const routes: Routes = [
-  { path: 'bio', loadChildren: () => import('./bio/bio.module').then(m => m.BioModule) },
+  { path: 'bio', component: BioFormComponent },
+  {
+    path: 'plan',
+    component: PlanComponent,
+    resolve: {
+      baseItems: BaseItemService,
+    },
+  },
+  { path: 'review', component: ReviewComponent },
   { path: '**', component: ErrorComponent },
 ]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
+  providers: [BaseItemService],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

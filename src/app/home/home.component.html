@@ -3,8 +3,9 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar></mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="/bio/view" routerLinkActive="active">Xpert Bio</a>
-      <a mat-list-item href="#">Link 2</a>
+      <a mat-list-item routerLink="/review" routerLinkActive="active">Plan Overview</a>
+      <a mat-list-item routerLink="/bio" routerLinkActive="active">Xpert Bio</a>
+      <a mat-list-item routerLink="/plan" routerLinkActive="active">Xpert Plan</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

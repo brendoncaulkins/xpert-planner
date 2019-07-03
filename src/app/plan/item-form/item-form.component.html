@@ -1,0 +1,39 @@
+<form [formGroup]="formGroup" class="content" fxLayout="row" fxLayoutGap="10px">
+  <mat-form-field fxFlex="20%">
+    <mat-label>Entry Type</mat-label>
+    <mat-select required [formControl]="baseItem">
+      <mat-optgroup *ngFor="let cat of categories$ | async" [label]="cat.name">
+        <mat-option *ngFor="let item of itemsByCategory(cat)">{{ item.type }}</mat-option>
+      </mat-optgroup>
+    </mat-select>
+    <mat-error *ngIf="baseItem.hasError('required')">This field is required</mat-error>
+  </mat-form-field>
+  <mat-form-field fxFlex="30%">
+    <input matInput placeholder="Description" required [formControl]="description" />
+    <mat-error *ngIf="description.hasError('required')">This field is required</mat-error>
+    <mat-error *ngIf="description.hasError('minlength')">
+      Must be at least {{ description.getError('minlength').requiredLength }} characters
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field fxFlex="5%">
+    <input type="number" matInput placeholder="Points" required [formControl]="points" min="0" />
+    <mat-error *ngIf="points.hasError('required')">This field is required</mat-error>
+  </mat-form-field>
+  <div fxLayoutAlign="center center" fxFlex="10%">
+    <mat-checkbox required [formControl]="completed">Done</mat-checkbox>
+  </div>
+  <div fxFlex="20%">
+    <mat-form-field *ngIf="completed.value" fxFlex="90%">
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="completedOn"
+        [required]="completed.value">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="completedOn.hasError('required')">This field is required</mat-error>
+    </mat-form-field>
+  </div>
+  <div fxLayoutAlign="center center" fxFlex="5%" fxAlign="end">
+    <button mat-raised-button color="warn">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+</form>
