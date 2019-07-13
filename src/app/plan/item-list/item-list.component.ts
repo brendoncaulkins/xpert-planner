@@ -1,17 +1,16 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { AbstractControl, FormArray, FormGroup } from '@angular/forms'
 
-import { AbstractFormComponent } from '../abstracts/abstract-form/abstract-form.component'
-import { IPlanItem } from '../models/xpert-plan.interface'
+import { AbstractFormComponent } from '../../abstracts/abstract-form/abstract-form.component'
+import { IPlanItem } from '../../models/xpert-plan.interface'
 
 @Component({
-  selector: 'app-plan',
-  templateUrl: './plan.component.html',
-  styleUrls: ['./plan.component.css'],
+  selector: 'app-item-list',
+  templateUrl: './item-list.component.html',
 })
-export class PlanComponent extends AbstractFormComponent<IPlanItem[]>
+export class ItemListComponent extends AbstractFormComponent<IPlanItem[]>
   implements OnInit, OnDestroy {
-  @Input() plan: IPlanItem[] = [{} as IPlanItem]
+  @Input() itemList: IPlanItem[] = [{} as IPlanItem]
 
   constructor() {
     super()
@@ -36,11 +35,11 @@ export class PlanComponent extends AbstractFormComponent<IPlanItem[]>
   }
 
   onAddItem() {
-    this.plan.push({} as IPlanItem)
+    this.itemList.push({} as IPlanItem)
   }
 
   onDelete(index: number) {
-    this.plan.splice(index, 1)
+    this.itemList.splice(index, 1)
   }
 
   ngOnDestroy() {}

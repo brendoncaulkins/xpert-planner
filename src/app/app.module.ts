@@ -11,7 +11,7 @@ import { ErrorComponent } from './error/error.component'
 import { HomeComponent } from './home/home.component'
 import { MaterialModule } from './material.module'
 import { ItemFormComponent } from './plan/item-form/item-form.component'
-import { PlanComponent } from './plan/plan.component'
+import { ItemListComponent } from './plan/item-list/item-list.component'
 import { ReviewComponent } from './review/review.component'
 
 @NgModule({
@@ -21,7 +21,7 @@ import { ReviewComponent } from './review/review.component'
     ErrorComponent,
     HomeComponent,
     ItemFormComponent,
-    PlanComponent,
+    ItemListComponent,
     ReviewComponent,
   ],
   imports: [
