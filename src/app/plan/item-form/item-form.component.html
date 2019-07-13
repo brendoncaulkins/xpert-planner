@@ -3,7 +3,7 @@
     <mat-label>Entry Type</mat-label>
     <mat-select required [formControl]="baseItem">
       <mat-optgroup *ngFor="let cat of categories$ | async" [label]="cat.name">
-        <mat-option *ngFor="let item of itemsByCategory(cat)">{{ item.type }}</mat-option>
+        <mat-option *ngFor="let item of itemsByCategory(cat)" [value]="item">{{ item.type }}</mat-option>
       </mat-optgroup>
     </mat-select>
     <mat-error *ngIf="baseItem.hasError('required')">This field is required</mat-error>
@@ -32,7 +32,7 @@
     </mat-form-field>
   </div>
   <div fxLayoutAlign="center center" fxFlex="5%" fxAlign="end">
-    <button mat-raised-button color="warn">
+    <button mat-raised-button color="warn" (click)="onDelete()">
       <mat-icon>clear</mat-icon>
     </button>
   </div>

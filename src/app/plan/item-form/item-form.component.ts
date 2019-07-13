@@ -1,7 +1,15 @@
-import { Component, OnChanges, OnDestroy, SimpleChanges } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  Output,
+  SimpleChanges,
+} from '@angular/core'
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Observable } from 'rxjs'
-import { map, tap } from 'rxjs/operators'
+import { filter, map } from 'rxjs/operators'
 import { BaseItemService } from 'src/app/services/base-item/base-item.service'
 import { SubSink } from 'subsink'
 
@@ -16,6 +24,8 @@ import { hasChanged } from '../../utils/functions'
 })
 export class ItemFormComponent extends AbstractFormComponent<IPlanItem>
   implements OnChanges, OnDestroy {
+  @Input() item: IPlanItem
+  @Output() delete = new EventEmitter<void>(true)
   subs = new SubSink()
   categories$: Observable<ICategory[]>
 
@@ -40,7 +50,14 @@ export class ItemFormComponent extends AbstractFormComponent<IPlanItem>
     this.subs.add(
       this.completed.valueChanges.subscribe(completed =>
         completed ? this.completedOn.enable() : this.completedOn.disable()
-      )
+      ),
+      this.baseItem.valueChanges
+        .pipe(filter(i => !!i))
+        .subscribe((item: IBasePlanItem) => {
+          if (!this.points.value) {
+            this.points.setValue(item.points)
+          }
+        })
     )
   }
 
@@ -58,6 +75,10 @@ export class ItemFormComponent extends AbstractFormComponent<IPlanItem>
     if (this.data && hasChanged(changes.data)) {
       this.formGroup.patchValue(this.data)
     }
+  }
+
+  onDelete() {
+    this.delete.emit()
   }
 
   ngOnDestroy() {

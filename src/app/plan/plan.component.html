@@ -1,1 +1,11 @@
-<app-item-form></app-item-form>
+<div fxLayout="column">
+  <div fxFlex="100%" *ngFor="let item of plan; let i = index">
+    <app-item-form [item]="item" (formReady)="registerArrayForm('plan', i, item)" (destroyForm)="deregisterForm(i)"
+      (delete)="onDelete(i)">
+    </app-item-form>
+  </div>
+  <div>
+    <button mat-raised-button color="primary" value="add plan item" [disabled]="formGroup.invalid"
+      (click)="onAddItem()">Add Item</button>
+  </div>
+</div>
