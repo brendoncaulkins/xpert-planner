@@ -1,6 +1,7 @@
 <div fxLayout="column">
-  <div fxFlex="100%" *ngFor="let item of plan; let i = index">
-    <app-item-form [item]="item" (formReady)="registerArrayForm('plan', i, item)" (destroyForm)="deregisterForm(i)"
+  <div fxFlex="100%" *ngFor="let item of itemList; let i = index">
+    <app-item-form [item]="item" [categoryFilter]="categoryId"
+      (formReady)="registerArrayForm('categoryPlan', i, $event)" (destroyForm)="deregisterForm(i)"
       (delete)="onDelete(i)">
     </app-item-form>
   </div>

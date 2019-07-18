@@ -4,6 +4,7 @@ import {
   MatButtonModule,
   MatCheckboxModule,
   MatDatepickerModule,
+  MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
@@ -16,6 +17,7 @@ import {
 
 const materialModules = [
   LayoutModule,
+  MatExpansionModule,
   MatButtonModule,
   MatCheckboxModule,
   MatDatepickerModule,

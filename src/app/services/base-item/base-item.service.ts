@@ -4,9 +4,7 @@ import { AbstractCrudMockService } from '../../abstracts/abstract-crud-service/a
 import { IBasePlanItem } from '../../models/xpert-plan.interface'
 import { dummyBasePlanItems } from '../mock.data'
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class BaseItemService extends AbstractCrudMockService<IBasePlanItem> {
   endpoint = '/base-entry'
 

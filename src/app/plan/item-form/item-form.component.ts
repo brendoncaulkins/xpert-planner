@@ -4,6 +4,7 @@ import {
   Input,
   OnChanges,
   OnDestroy,
+  OnInit,
   Output,
   SimpleChanges,
 } from '@angular/core'
@@ -23,28 +24,20 @@ import { hasChanged } from '../../utils/functions'
   styleUrls: ['./item-form.component.css'],
 })
 export class ItemFormComponent extends AbstractFormComponent<IPlanItem>
-  implements OnChanges, OnDestroy {
+  implements OnInit, OnChanges, OnDestroy {
   @Input() item: IPlanItem
+  @Input() categoryFilter: number
   @Output() delete = new EventEmitter<void>(true)
   subs = new SubSink()
-  categories$: Observable<ICategory[]>
+  items$: Observable<IBasePlanItem[]>
 
   constructor(private formBuilder: FormBuilder, public baseItemService: BaseItemService) {
     super()
 
     this.formGroup = this.buildForm()
 
-    this.categories$ = this.baseItemService.list.pipe(
-      map(items =>
-        items
-          .map(i => i.category)
-          .reduce((p, c, i, ary) => {
-            if (p.every(x => x.id !== c.id)) {
-              p.push(c)
-            }
-            return p
-          }, [])
-      )
+    this.items$ = this.baseItemService.list.pipe(
+      map(list => list.filter(item => item.category.id === this.categoryFilter))
     )
 
     this.subs.add(
@@ -71,6 +64,10 @@ export class ItemFormComponent extends AbstractFormComponent<IPlanItem>
     })
   }
 
+  ngOnInit() {
+    this.emitFormReady()
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (this.data && hasChanged(changes.data)) {
       this.formGroup.patchValue(this.data)
@@ -83,10 +80,6 @@ export class ItemFormComponent extends AbstractFormComponent<IPlanItem>
 
   ngOnDestroy() {
     this.destroyForm.emit()
-  }
-
-  itemsByCategory(category: ICategory): IBasePlanItem[] {
-    return this.baseItemService.list.value.filter(i => i.category.id === category.id)
   }
 
   /*  GETTERS  */

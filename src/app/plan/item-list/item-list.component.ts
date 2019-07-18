@@ -1,5 +1,6 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core'
 import { AbstractControl, FormArray, FormGroup } from '@angular/forms'
+import { SubSink } from 'subsink'
 
 import { AbstractFormComponent } from '../../abstracts/abstract-form/abstract-form.component'
 import { IPlanItem } from '../../models/xpert-plan.interface'
@@ -11,6 +12,7 @@ import { IPlanItem } from '../../models/xpert-plan.interface'
 export class ItemListComponent extends AbstractFormComponent<IPlanItem[]>
   implements OnInit, OnDestroy {
   @Input() itemList: IPlanItem[] = [{} as IPlanItem]
+  @Input() categoryId: number
 
   constructor() {
     super()
@@ -19,10 +21,12 @@ export class ItemListComponent extends AbstractFormComponent<IPlanItem[]>
   }
 
   buildForm(): FormGroup {
-    return new FormGroup({ plan: new FormArray([]) })
+    return new FormGroup({ categoryPlan: new FormArray([]) })
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.emitFormReady()
+  }
 
   registerArrayForm(name: string, index: number, control: AbstractControl): void {
     const array = this.formGroup.get(name) as FormArray

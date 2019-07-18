@@ -12,7 +12,10 @@ import { HomeComponent } from './home/home.component'
 import { MaterialModule } from './material.module'
 import { ItemFormComponent } from './plan/item-form/item-form.component'
 import { ItemListComponent } from './plan/item-list/item-list.component'
+import { PlanComponent } from './plan/plan.component'
 import { ReviewComponent } from './review/review.component'
+import { BaseItemService } from './services/base-item/base-item.service'
+import { CategoryService } from './services/category/category.service'
 
 @NgModule({
   declarations: [
@@ -23,6 +26,7 @@ import { ReviewComponent } from './review/review.component'
     ItemFormComponent,
     ItemListComponent,
     ReviewComponent,
+    PlanComponent,
   ],
   imports: [
     CommonModule,
@@ -33,7 +37,7 @@ import { ReviewComponent } from './review/review.component'
     ReactiveFormsModule,
     FlexLayoutModule,
   ],
-  providers: [],
+  providers: [BaseItemService, CategoryService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

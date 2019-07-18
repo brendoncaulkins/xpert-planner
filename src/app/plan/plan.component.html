@@ -1,0 +1,12 @@
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let category of categories$ | async; let i = index">
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{ category.name }}</mat-panel-title>
+      <mat-panel-description>Forecasted: X, Earned: Y
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-item-list (formReady)="registerArrayForm('plan', i, $event)" [categoryId]="category.id"></app-item-list>
+  </mat-expansion-panel>
+</mat-accordion>
+<div>Total Forecasted: X</div>
+<div>Total Earned: Y</div>
