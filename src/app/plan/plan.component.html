@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-accordion>
+  <mat-accordion [multi]="true">
     <mat-expansion-panel *ngFor="let category of categories$ | async; let i = index">
       <mat-expansion-panel-header class="right-aligned-header">
         <mat-panel-title>{{ category.name }}</mat-panel-title>
