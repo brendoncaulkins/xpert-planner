@@ -60,7 +60,7 @@ export class ItemFormComponent extends AbstractFormComponent<IPlanItem>
       description: ['', [Validators.required, Validators.minLength(10)]],
       points: [0, [Validators.required]],
       completed: [false],
-      completedOn: [null, Validators.required, { disabled: true }],
+      completedOn: [null, Validators.required, null, { disabled: true }],
     })
   }
 
