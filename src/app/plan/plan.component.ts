@@ -1,11 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms'
-import { Observable } from 'rxjs'
-import { map, startWith, tap } from 'rxjs/operators'
+import { BehaviorSubject, Observable } from 'rxjs'
+import { map } from 'rxjs/operators'
 
 import { AbstractFormComponent } from '../abstracts/abstract-form/abstract-form.component'
-import { ICategory, IPlanItem } from '../models/xpert-plan.interface'
+import { ICategory } from '../models/xpert-plan.interface'
 import { CategoryService } from '../services/category/category.service'
+
+interface CategoryPoints {
+  forecasted: number
+  earned: number
+}
 
 @Component({
   selector: 'app-plan',
@@ -14,6 +19,10 @@ import { CategoryService } from '../services/category/category.service'
 export class PlanComponent extends AbstractFormComponent<any>
   implements OnInit, OnDestroy {
   categories$: Observable<ICategory[]>
+  categoryPoints$ = new BehaviorSubject<CategoryPoints[]>([])
+
+  totalForecasted$: Observable<number>
+  totalEarned$: Observable<number>
 
   constructor(
     private formBuilder: FormBuilder,
@@ -22,6 +31,18 @@ export class PlanComponent extends AbstractFormComponent<any>
     super()
     this.formGroup = this.buildForm()
     this.categories$ = this.categoryService.list
+
+    this.totalForecasted$ = this.categoryPoints$.pipe(
+      map(points =>
+        points.map(p => (p ? p.forecasted : 0)).reduce((p, c, i, ary) => p + c, 0)
+      )
+    )
+
+    this.totalEarned$ = this.categoryPoints$.pipe(
+      map(points =>
+        points.map(p => (p ? p.earned : 0)).reduce((p, c, i, ary) => p + c, 0)
+      )
+    )
   }
 
   buildForm(): FormGroup {
@@ -45,6 +66,28 @@ export class PlanComponent extends AbstractFormComponent<any>
   }
 
   ngOnDestroy() {}
+
+  setPointsForecasted(index: number, points: number) {
+    const currentPoints = this.categoryPoints$.value
+    currentPoints[index] = { ...currentPoints[index], forecasted: points }
+    this.categoryPoints$.next(currentPoints)
+  }
+
+  setPointsEarned(index: number, points: number) {
+    const currentPoints = this.categoryPoints$.value
+    currentPoints[index] = { ...currentPoints[index], earned: points }
+    this.categoryPoints$.next(currentPoints)
+  }
+
+  getPointsDisplayByIndex(index: number): Observable<string> {
+    return this.categoryPoints$.pipe(
+      map(points =>
+        points[index]
+          ? `Forecasted: ${points[index].forecasted}, Earned: ${points[index].earned}`
+          : 'Forecasted: Unknown, Earned: Unknown'
+      )
+    )
+  }
 
   get plan(): FormArray {
     return this.formGroup.get('plan') as FormArray

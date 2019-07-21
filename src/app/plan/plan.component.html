@@ -1,12 +1,15 @@
-<mat-accordion>
-  <mat-expansion-panel *ngFor="let category of categories$ | async; let i = index">
-    <mat-expansion-panel-header>
-      <mat-panel-title>{{ category.name }}</mat-panel-title>
-      <mat-panel-description>Forecasted: X, Earned: Y
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <app-item-list (formReady)="registerArrayForm('plan', i, $event)" [categoryId]="category.id"></app-item-list>
-  </mat-expansion-panel>
-</mat-accordion>
-<div>Total Forecasted: X</div>
-<div>Total Earned: Y</div>
+<mat-card>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let category of categories$ | async; let i = index">
+      <mat-expansion-panel-header class="right-aligned-header">
+        <mat-panel-title>{{ category.name }}</mat-panel-title>
+        <mat-panel-description>{{ getPointsDisplayByIndex(i) | async }}</mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-item-list [categoryId]="category.id" (formReady)="registerArrayForm('plan', i, $event)"
+        (forecastedPoints$)="setPointsForecasted(i, $event)" (earnedPoints$)="setPointsEarned(i, $event)">
+      </app-item-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <h3>Total Forecasted: {{ totalForecasted$ | async }}</h3>
+  <h3>Total Earned: {{ totalEarned$ | async }}</h3>
+</mat-card>

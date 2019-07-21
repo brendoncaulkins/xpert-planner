@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core'
+import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core'
 import { AbstractControl, FormArray, FormGroup } from '@angular/forms'
-import { SubSink } from 'subsink'
+import { Observable } from 'rxjs'
+import { distinctUntilChanged, map, tap } from 'rxjs/operators'
 
 import { AbstractFormComponent } from '../../abstracts/abstract-form/abstract-form.component'
 import { IPlanItem } from '../../models/xpert-plan.interface'
@@ -14,10 +15,28 @@ export class ItemListComponent extends AbstractFormComponent<IPlanItem[]>
   @Input() itemList: IPlanItem[] = [{} as IPlanItem]
   @Input() categoryId: number
 
+  @Output() forecastedPoints$: Observable<number>
+  @Output() earnedPoints$: Observable<number>
+
   constructor() {
     super()
 
     this.formGroup = this.buildForm()
+
+    this.forecastedPoints$ = this.formGroup.valueChanges.pipe(
+      map(category => category.categoryPlan),
+      map((items: IPlanItem[]) =>
+        items.map(i => i.points).reduce((p, c, i, ary) => p + c, 0)
+      ),
+      distinctUntilChanged()
+    )
+    this.earnedPoints$ = this.formGroup.valueChanges.pipe(
+      map(category => category.categoryPlan),
+      map((items: IPlanItem[]) =>
+        items.map(i => (i.completed ? i.points : 0)).reduce((p, c, i, ary) => p + c, 0)
+      ),
+      distinctUntilChanged()
+    )
   }
 
   buildForm(): FormGroup {
