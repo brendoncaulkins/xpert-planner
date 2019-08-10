@@ -1,11 +1,9 @@
 import {
   Component,
-  EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
-  Output,
   SimpleChanges,
 } from '@angular/core'
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
@@ -15,7 +13,7 @@ import { BaseItemService } from 'src/app/services/base-item/base-item.service'
 import { SubSink } from 'subsink'
 
 import { AbstractFormComponent } from '../../abstracts/abstract-form/abstract-form.component'
-import { IBasePlanItem, ICategory, IPlanItem } from '../../models/xpert-plan.interface'
+import { IBasePlanItem, IPlanItem } from '../../models/xpert-plan.interface'
 import { hasChanged } from '../../utils/functions'
 
 @Component({
@@ -60,13 +58,17 @@ export class ItemFormComponent extends AbstractFormComponent<IPlanItem>
     return this.formBuilder.group({
       baseItem: [null, Validators.required],
       description: ['', [Validators.required, Validators.minLength(10)]],
-      points: [0, [Validators.required]],
+      points: [0, [Validators.required, Validators.min(1)]],
       completed: [false],
       completedOn: [null, Validators.required, null, { disabled: true }],
     })
   }
 
   ngOnInit() {
+    if (this.item.baseItem) {
+      console.log(this.item)
+      this.formGroup.patchValue(this.item)
+    }
     this.emitFormReady()
   }
 

@@ -12,11 +12,13 @@ import { IPlanItem } from '../../models/xpert-plan.interface'
 })
 export class ItemListComponent extends AbstractFormComponent<IPlanItem[]>
   implements OnInit, OnDestroy {
-  @Input() itemList: IPlanItem[] = [{} as IPlanItem]
+  @Input() initialData: IPlanItem[] = []
   @Input() categoryId: number
 
   @Output() forecastedPoints$: Observable<number>
   @Output() earnedPoints$: Observable<number>
+
+  itemList: IPlanItem[] = [{} as IPlanItem]
 
   constructor() {
     super()
@@ -42,6 +44,8 @@ export class ItemListComponent extends AbstractFormComponent<IPlanItem[]>
   }
 
   ngOnInit() {
+    this.itemList = this.initialData.length > 0 ? this.initialData : this.itemList
+    this.plan.patchValue(this.itemList)
     this.emitFormReady(this.plan)
   }
 

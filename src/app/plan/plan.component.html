@@ -5,8 +5,9 @@
         <mat-panel-title>{{ category.name }}</mat-panel-title>
         <mat-panel-description>{{ getPointsDisplayByIndex(i) | async }}</mat-panel-description>
       </mat-expansion-panel-header>
-      <app-item-list [categoryId]="category.id" (formReady)="registerArrayForm('plan', i, $event)"
-        (forecastedPoints$)="setPointsForecasted(i, $event)" (earnedPoints$)="setPointsEarned(i, $event)">
+      <app-item-list [initialData]="planItemsByCategory(category.id) | async" [categoryId]="category.id"
+        (formReady)="registerArrayForm(i, $event)" (forecastedPoints$)="setPointsForecasted(i, $event)"
+        (earnedPoints$)="setPointsEarned(i, $event)">
       </app-item-list>
     </mat-expansion-panel>
   </mat-accordion>

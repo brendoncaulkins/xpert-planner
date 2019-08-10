@@ -14,8 +14,9 @@
     </mat-error>
   </mat-form-field>
   <mat-form-field fxFlex="5%">
-    <input type="number" matInput placeholder="Points" required [formControl]="points" min="0" />
+    <input type="number" matInput placeholder="Points" required [formControl]="points" min="1" />
     <mat-error *ngIf="points.hasError('required')">This field is required</mat-error>
+    <mat-error *ngIf="points.hasError('min')">Must be at least {{ points.getError('min').min }}</mat-error>
   </mat-form-field>
   <div fxLayoutAlign="center center" fxFlex="10%">
     <mat-checkbox [formControl]="completed">Done</mat-checkbox>

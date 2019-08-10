@@ -8,16 +8,17 @@ import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { BioFormComponent } from './bio-form/bio-form.component'
 import { ErrorComponent } from './error/error.component'
+import { ExportPlanComponent } from './export-plan/export-plan.component'
 import { HomeComponent } from './home/home.component'
+import { ImportPlanComponent } from './import-plan/import-plan.component'
 import { MaterialModule } from './material.module'
 import { ItemFormComponent } from './plan/item-form/item-form.component'
 import { ItemListComponent } from './plan/item-list/item-list.component'
 import { PlanComponent } from './plan/plan.component'
 import { ReviewComponent } from './review/review.component'
 import { BaseItemService } from './services/base-item/base-item.service'
-import { CategoryService } from './services/category/category.service';
-import { ImportPlanComponent } from './import-plan/import-plan.component';
-import { ExportPlanComponent } from './export-plan/export-plan.component'
+import { CategoryService } from './services/category/category.service'
+import { PlanService } from './services/plan/plan.service'
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { ExportPlanComponent } from './export-plan/export-plan.component'
     ReactiveFormsModule,
     FlexLayoutModule,
   ],
-  providers: [BaseItemService, CategoryService],
+  providers: [BaseItemService, CategoryService, PlanService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
