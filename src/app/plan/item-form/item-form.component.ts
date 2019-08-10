@@ -66,7 +66,6 @@ export class ItemFormComponent extends AbstractFormComponent<IPlanItem>
 
   ngOnInit() {
     if (this.item.baseItem) {
-      console.log(this.item)
       this.formGroup.patchValue(this.item)
     }
     this.emitFormReady()

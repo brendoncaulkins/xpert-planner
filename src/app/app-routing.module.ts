@@ -22,7 +22,13 @@ const routes: Routes = [
   },
   { path: 'review', component: ReviewComponent },
   { path: 'export', component: ExportPlanComponent },
-  { path: 'import', component: ImportPlanComponent },
+  {
+    path: 'import',
+    component: ImportPlanComponent,
+    resolve: {
+      baseItems: BaseItemService,
+    },
+  },
   { path: '', redirectTo: 'review', pathMatch: 'full' },
   { path: '**', component: ErrorComponent },
 ]
