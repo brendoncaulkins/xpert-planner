@@ -15,10 +15,10 @@ import { MaterialModule } from './material.module'
 import { ItemFormComponent } from './plan/item-form/item-form.component'
 import { ItemListComponent } from './plan/item-list/item-list.component'
 import { PlanComponent } from './plan/plan.component'
-import { ReviewComponent } from './review/review.component'
 import { BaseItemService } from './services/base-item/base-item.service'
 import { CategoryService } from './services/category/category.service'
-import { PlanService } from './services/plan/plan.service'
+import { PlanService } from './services/plan/plan.service';
+import { OverviewComponent } from './overview/overview.component'
 
 @NgModule({
   declarations: [
@@ -28,10 +28,10 @@ import { PlanService } from './services/plan/plan.service'
     HomeComponent,
     ItemFormComponent,
     ItemListComponent,
-    ReviewComponent,
     PlanComponent,
     ImportPlanComponent,
     ExportPlanComponent,
+    OverviewComponent,
   ],
   imports: [
     CommonModule,

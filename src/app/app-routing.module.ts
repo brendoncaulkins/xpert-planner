@@ -5,8 +5,8 @@ import { BioFormComponent } from './bio-form/bio-form.component'
 import { ErrorComponent } from './error/error.component'
 import { ExportPlanComponent } from './export-plan/export-plan.component'
 import { ImportPlanComponent } from './import-plan/import-plan.component'
+import { OverviewComponent } from './overview/overview.component'
 import { PlanComponent } from './plan/plan.component'
-import { ReviewComponent } from './review/review.component'
 import { BaseItemService } from './services/base-item/base-item.service'
 import { CategoryService } from './services/category/category.service'
 
@@ -20,7 +20,7 @@ const routes: Routes = [
       categories: CategoryService,
     },
   },
-  { path: 'review', component: ReviewComponent },
+  { path: 'overview', component: OverviewComponent },
   { path: 'export', component: ExportPlanComponent },
   {
     path: 'import',
@@ -29,7 +29,7 @@ const routes: Routes = [
       baseItems: BaseItemService,
     },
   },
-  { path: '', redirectTo: 'review', pathMatch: 'full' },
+  { path: '', redirectTo: 'overview', pathMatch: 'full' },
   { path: '**', component: ErrorComponent },
 ]
 
