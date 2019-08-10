@@ -101,7 +101,6 @@ function findBaseItem(
   baseItemType: string,
   baseItems: IBasePlanItem[]
 ): IBasePlanItem {
-  console.log(categoryName, baseItemType)
   return baseItems.find(i => i.category.name === categoryName && i.type === baseItemType)
 }
 
