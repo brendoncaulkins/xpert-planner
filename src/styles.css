@@ -18,3 +18,7 @@ body {
 .mat-content>mat-panel-description {
   flex: 0 0 auto;
 }
+
+.solo-mat-card {
+  margin: 10px;
+}
