@@ -1,1 +1,14 @@
-<p>import-plan works!</p>
+<mat-card class="solo-mat-card" fxFlex="40" fxFlex.xs="100" fxLayout="column">
+  <mat-card-header>Export Xpert Plan</mat-card-header>
+  <mat-card-content fxFlex="100" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+    <mat-form-field fxFlex="80" fxFlex.xs="100">
+      <mat-label>Export as...</mat-label>
+      <mat-select>
+        <mat-option [value]="'CSV'">Comma Separated Value (.csv)</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div fxFlex="20" fxFlex.xs="100" fxLayoutAlign="center center">
+      <button mat-raised-button color="primary" fxFlex="100">Export</button>
+    </div>
+  </mat-card-content>
+</mat-card>
