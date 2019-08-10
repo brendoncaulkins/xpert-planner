@@ -30,15 +30,16 @@ export const supportedFileTypes: ISupportedFileType[] = [
   },
 ]
 
-const csvHeader = 'Category,Description,Points,Completed,Completed On'
+const csvHeader = 'Category,Type,Description,Points,Completed,Completed On'
 export function exportAsCsv(items: IPlanItem[]): string {
   const rows = items.map(i =>
     [
       i.baseItem.category.name,
+      i.baseItem.type,
       i.description,
       i.points,
       i.completed,
-      i.completedOn ? i.completedOn.toLocaleDateString() : '',
+      safeDateString(i.completedOn),
     ].join(',')
   )
   rows.unshift(csvHeader)
@@ -55,13 +56,13 @@ export function importFromCsv(data: string, baseItems: IBasePlanItem[]): IPlanIt
 
 function csvToPlanItem(row: string, baseItems: IBasePlanItem[]): IPlanItem {
   const fields = row.split(',')
-  return fields.length >= 4
+  return fields.length >= 5
     ? {
-        baseItem: baseItems.find(i => i.category.name === fields[0]),
-        description: fields[1],
-        points: Number.parseInt(fields[2], 10),
-        completed: fields[3].toLowerCase() === 'true',
-        completedOn: fields[3].toLowerCase() === 'true' ? new Date(fields[4]) : null,
+        baseItem: findBaseItem(fields[0], fields[1], baseItems),
+        description: fields[2],
+        points: Number.parseInt(fields[3], 10),
+        completed: fields[4].toLowerCase() === 'true',
+        completedOn: fields[4].toLowerCase() === 'true' ? new Date(fields[5]) : null,
         id: null,
       }
     : null
@@ -71,14 +72,39 @@ export function exportAsJson(items: IPlanItem[]): string {
   return JSON.stringify(
     items.map(i => ({
       category: i.baseItem.category.name,
+      type: i.baseItem.type,
       description: i.description,
       points: i.points,
       completed: i.completed,
-      completedOn: i.completedOn ? i.completedOn.toLocaleDateString() : '',
+      completedOn: safeDateString(i.completedOn),
     }))
   )
 }
 
 export function importFromJson(data: string, baseItems: IBasePlanItem[]): IPlanItem[] {
-  return []
+  const json: any[] = JSON.parse(data)
+  return json.map(
+    j =>
+      ({
+        baseItem: findBaseItem(j.category, j.type, baseItems),
+        description: j.description,
+        points: j.points,
+        completed: j.completed,
+        completedOn: j.completed ? new Date(j.completedOn) : '',
+        id: null,
+      } as IPlanItem)
+  )
+}
+
+function findBaseItem(
+  categoryName: string,
+  baseItemType: string,
+  baseItems: IBasePlanItem[]
+): IBasePlanItem {
+  console.log(categoryName, baseItemType)
+  return baseItems.find(i => i.category.name === categoryName && i.type === baseItemType)
+}
+
+function safeDateString(date: Date): string {
+  return date ? date.toLocaleDateString() : ''
 }
