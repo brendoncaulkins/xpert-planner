@@ -10,7 +10,7 @@ import {
 } from '@angular/core'
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Observable } from 'rxjs'
-import { filter, map } from 'rxjs/operators'
+import { filter, map, startWith } from 'rxjs/operators'
 import { BaseItemService } from 'src/app/services/base-item/base-item.service'
 import { SubSink } from 'subsink'
 
@@ -41,9 +41,11 @@ export class ItemFormComponent extends AbstractFormComponent<IPlanItem>
     )
 
     this.subs.add(
-      this.completed.valueChanges.subscribe(completed =>
-        completed ? this.completedOn.enable() : this.completedOn.disable()
-      ),
+      this.completed.valueChanges
+        .pipe(startWith(this.completed.value))
+        .subscribe(completed =>
+          completed ? this.completedOn.enable() : this.completedOn.disable()
+        ),
       this.baseItem.valueChanges
         .pipe(filter(i => !!i))
         .subscribe((item: IBasePlanItem) => {

@@ -18,7 +18,7 @@
     <mat-error *ngIf="points.hasError('required')">This field is required</mat-error>
   </mat-form-field>
   <div fxLayoutAlign="center center" fxFlex="10%">
-    <mat-checkbox required [formControl]="completed">Done</mat-checkbox>
+    <mat-checkbox [formControl]="completed">Done</mat-checkbox>
   </div>
   <div fxFlex="20%">
     <mat-form-field *ngIf="completed.value" fxFlex="90%">
