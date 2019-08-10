@@ -19,6 +19,7 @@ const routes: Routes = [
     },
   },
   { path: 'review', component: ReviewComponent },
+  { path: '', redirectTo: 'review', pathMatch: 'full' },
   { path: '**', component: ErrorComponent },
 ]
 
