@@ -23,15 +23,13 @@ export class ItemListComponent extends AbstractFormComponent<IPlanItem[]>
 
     this.formGroup = this.buildForm()
 
-    this.forecastedPoints$ = this.formGroup.valueChanges.pipe(
-      map(category => category.categoryPlan),
+    this.forecastedPoints$ = this.plan.valueChanges.pipe(
       map((items: IPlanItem[]) =>
         items.map(i => i.points).reduce((p, c, i, ary) => p + c, 0)
       ),
       distinctUntilChanged()
     )
-    this.earnedPoints$ = this.formGroup.valueChanges.pipe(
-      map(category => category.categoryPlan),
+    this.earnedPoints$ = this.plan.valueChanges.pipe(
       map((items: IPlanItem[]) =>
         items.map(i => (i.completed ? i.points : 0)).reduce((p, c, i, ary) => p + c, 0)
       ),
@@ -44,17 +42,15 @@ export class ItemListComponent extends AbstractFormComponent<IPlanItem[]>
   }
 
   ngOnInit() {
-    this.emitFormReady()
+    this.emitFormReady(this.plan)
   }
 
   registerArrayForm(name: string, index: number, control: AbstractControl): void {
-    const array = this.formGroup.get(name) as FormArray
-    array.setControl(index, control)
+    this.plan.setControl(index, control)
   }
 
   deregisterArrayForm(index: number) {
-    const array = this.formGroup.get(name) as FormArray
-    array.removeAt(index)
+    this.plan.removeAt(index)
   }
 
   onAddItem() {
@@ -65,5 +61,11 @@ export class ItemListComponent extends AbstractFormComponent<IPlanItem[]>
     this.itemList.splice(index, 1)
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.destroyForm.emit()
+  }
+
+  get plan(): FormArray {
+    return this.formGroup.get('categoryPlan') as FormArray
+  }
 }

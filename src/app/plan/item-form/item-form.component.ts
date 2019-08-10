@@ -27,7 +27,7 @@ export class ItemFormComponent extends AbstractFormComponent<IPlanItem>
   implements OnInit, OnChanges, OnDestroy {
   @Input() item: IPlanItem
   @Input() categoryFilter: number
-  @Output() delete = new EventEmitter<void>(true)
+
   subs = new SubSink()
   items$: Observable<IBasePlanItem[]>
 
@@ -74,10 +74,6 @@ export class ItemFormComponent extends AbstractFormComponent<IPlanItem>
     if (this.data && hasChanged(changes.data)) {
       this.formGroup.patchValue(this.data)
     }
-  }
-
-  onDelete() {
-    this.delete.emit()
   }
 
   ngOnDestroy() {
