@@ -1,1 +1,37 @@
-<p>overview works!</p>
+<div class="container">
+  <div *ngIf="!(plan$ | async)?.length; else charts">
+    <mat-card>
+      <mat-card-header>Instructions</mat-card-header>
+      <mat-card-content>
+        <h3 mat-header>Build an Xpert plan!</h3>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <ng-template #charts>
+    <div fxLayout="column" fxLayoutGap="15px">
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px" fxFlex="100">
+        <mat-card *ngIf="contributionsByCategory$ | async as byCategory" fxFlex="49" fxFlex.xs="100">
+          <mat-card-header>Plan Contributions by Category</mat-card-header>
+          <mat-card-content>
+            <canvas baseChart [data]="byCategory?.data" [labels]="byCategory?.labels" [chartType]="byCategory?.type"
+              [legend]="byCategory?.legend"></canvas>
+          </mat-card-content>
+        </mat-card>
+        <mat-card *ngIf="status$ | async as status" fxFlex="49" fxFlex.xs="100">
+          <mat-card-header>Contributions by Status</mat-card-header>
+          <mat-card-content>
+            <canvas baseChart [data]="status?.data" [labels]="status?.labels" [chartType]="status?.type"
+              [legend]="status?.legend"></canvas>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <mat-card *ngIf="contributionsByMonth$ | async as byMonth" fxFlex="100">
+        <mat-card-header>Plan Contributions by Month</mat-card-header>
+        <mat-card-content>
+          <canvas baseChart [data]="byMonth?.data" [labels]="byMonth?.labels" [chartType]="byMonth?.type"
+            [legend]="byMonth?.legend"></canvas>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </ng-template>
+</div>
