@@ -32,11 +32,14 @@ export const supportedFileTypes: ISupportedFileType[] = [
 
 export function exportAsCsv(items: IPlanItem[]): string {
   const header = 'Category,Description,Points,Completed,Completed On'
-  const rows = items.map(
-    i =>
-      `${i.baseItem.category.name},${i.description},${i.points},${
-        i.completed
-      },${i.coompletedOn.toLocaleDateString()}`
+  const rows = items.map(i =>
+    [
+      i.baseItem.category.name,
+      i.description,
+      i.points,
+      i.completed,
+      i.completedOn ? i.completedOn.toLocaleDateString() : '',
+    ].join(',')
   )
   rows.unshift(header)
   return rows.join('\n')
@@ -53,7 +56,7 @@ export function exportAsJson(items: IPlanItem[]): string {
       description: i.description,
       points: i.points,
       completed: i.completed,
-      completedOn: i.coompletedOn,
+      completedOn: i.completedOn ? i.completedOn.toLocaleDateString() : '',
     }))
   )
 }

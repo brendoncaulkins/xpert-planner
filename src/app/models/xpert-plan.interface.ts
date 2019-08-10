@@ -23,5 +23,5 @@ export interface IPlanItem extends IBaseItem {
   description: string
   points?: number
   completed?: boolean
-  coompletedOn?: Date
+  completedOn?: Date
 }
