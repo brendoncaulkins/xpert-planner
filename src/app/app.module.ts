@@ -15,7 +15,9 @@ import { ItemListComponent } from './plan/item-list/item-list.component'
 import { PlanComponent } from './plan/plan.component'
 import { ReviewComponent } from './review/review.component'
 import { BaseItemService } from './services/base-item/base-item.service'
-import { CategoryService } from './services/category/category.service'
+import { CategoryService } from './services/category/category.service';
+import { ImportPlanComponent } from './import-plan/import-plan.component';
+import { ExportPlanComponent } from './export-plan/export-plan.component'
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { CategoryService } from './services/category/category.service'
     ItemListComponent,
     ReviewComponent,
     PlanComponent,
+    ImportPlanComponent,
+    ExportPlanComponent,
   ],
   imports: [
     CommonModule,
