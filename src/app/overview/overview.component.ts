@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { ChartOptions, ChartType } from 'chart.js'
-import {
-  Label,
-  SingleDataSet,
-  monkeyPatchChartJsLegend,
-  monkeyPatchChartJsTooltip,
-} from 'ng2-charts'
+import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
@@ -14,7 +9,7 @@ import { PlanService } from '../services/plan/plan.service'
 
 export interface IChartDetails {
   labels: Label[]
-  data: SingleDataSet
+  data: number[]
   type: ChartType
   legend: boolean
   options: ChartOptions
@@ -31,6 +26,8 @@ export class OverviewComponent implements OnInit {
   contributionsByCategory$: Observable<IChartDetails>
   status$: Observable<IChartDetails>
   contributionsByMonth$: Observable<IChartDetails>
+  pastSixMonthsTotal$: Observable<number>
+  pastYearTotal$: Observable<number>
 
   constructor(private planService: PlanService) {
     monkeyPatchChartJsLegend()
@@ -47,7 +44,19 @@ export class OverviewComponent implements OnInit {
     this.contributionsByMonth$ = this.plan$.pipe(
       map(plan => this.generateContributionsByMonth(plan))
     )
-    this.contributionsByMonth$.subscribe()
+    this.pastSixMonthsTotal$ = this.contributionsByMonth$.pipe(
+      map(contributions =>
+        contributions.data.reduce(
+          (sum: number, n: number, i: number) => (i > 6 ? sum + n : sum),
+          0
+        )
+      )
+    )
+    this.pastYearTotal$ = this.contributionsByMonth$.pipe(
+      map(contributions =>
+        contributions.data.reduce((sum: number, n: number) => sum + n, 0)
+      )
+    )
   }
 
   ngOnInit() {}

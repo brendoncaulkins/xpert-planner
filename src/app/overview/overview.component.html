@@ -25,13 +25,18 @@
           </mat-card-content>
         </mat-card>
       </div>
-      <mat-card *ngIf="contributionsByMonth$ | async as byMonth" fxFlex="100">
-        <mat-card-header>Plan Contributions by Month</mat-card-header>
-        <mat-card-content>
-          <canvas baseChart [data]="byMonth?.data" [labels]="byMonth?.labels" [chartType]="byMonth?.type"
-            [legend]="byMonth?.legend"></canvas>
-        </mat-card-content>
-      </mat-card>
+      <div fxFlex="100" fxLayoutAlign="center center">
+        <mat-card *ngIf="contributionsByMonth$ | async as byMonth" fxFlex="60%" fxFlex.xs="100%">
+          <mat-card-header>Plan Contributions by Month</mat-card-header>
+          <mat-card-content>
+            <canvas baseChart [data]="byMonth?.data" [labels]="byMonth?.labels" [chartType]="byMonth?.type"
+              [legend]="byMonth?.legend"></canvas>
+            <div>Points earned in the Past 6 Months: <strong>{{ pastSixMonthsTotal$ | async }}</strong></div>
+            <div>Points earned in the Past Year: <strong>{{ pastYearTotal$ | async }}</strong></div>
+
+          </mat-card-content>
+        </mat-card>
+      </div>
     </div>
   </ng-template>
 </div>
