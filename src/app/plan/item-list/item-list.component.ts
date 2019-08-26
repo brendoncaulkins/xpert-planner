@@ -55,6 +55,7 @@ export class ItemListComponent extends AbstractFormComponent<IPlanItem[]>
 
   deregisterArrayForm(index: number) {
     this.plan.removeAt(index)
+    this.plan.updateValueAndValidity()
   }
 
   onAddItem() {
