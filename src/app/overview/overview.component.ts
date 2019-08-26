@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core'
 import { ChartOptions, ChartType } from 'chart.js'
 import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts'
 import { Observable } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { map, withLatestFrom } from 'rxjs/operators'
 
-import { IPlanItem } from '../models/xpert-plan.interface'
+import { ICategory, IPlanItem } from '../models/xpert-plan.interface'
+import { CategoryService } from '../services/category/category.service'
 import { PlanService } from '../services/plan/plan.service'
 
 export interface IChartDetails {
@@ -24,19 +25,29 @@ export class OverviewComponent implements OnInit {
   plan$: Observable<IPlanItem[]>
 
   contributionsByCategory$: Observable<IChartDetails>
+  earnedContributionsByCategory$: Observable<IChartDetails>
   status$: Observable<IChartDetails>
   contributionsByMonth$: Observable<IChartDetails>
   pastSixMonthsTotal$: Observable<number>
   pastYearTotal$: Observable<number>
 
-  constructor(private planService: PlanService) {
+  constructor(
+    private planService: PlanService,
+    private categoryService: CategoryService
+  ) {
     monkeyPatchChartJsLegend()
     monkeyPatchChartJsTooltip()
 
     this.plan$ = this.planService.plan$
 
     this.contributionsByCategory$ = this.plan$.pipe(
-      map(plan => this.generateContributionsByCategory(plan))
+      withLatestFrom(categoryService.list),
+      map(([plan, categories]) => this.generateContributionsByCategory(categories, plan))
+    )
+    this.earnedContributionsByCategory$ = this.plan$.pipe(
+      map(plan => plan.filter(item => item.completed)),
+      withLatestFrom(categoryService.list),
+      map(([plan, categories]) => this.generateContributionsByCategory(categories, plan))
     )
 
     this.status$ = this.plan$.pipe(map(plan => this.generateStatus(plan)))
@@ -61,13 +72,11 @@ export class OverviewComponent implements OnInit {
 
   ngOnInit() {}
 
-  generateContributionsByCategory(items: IPlanItem[]): IChartDetails {
-    const dataLabels: Label[] = items.reduce((p: Label[], c: IPlanItem) => {
-      if (!p.includes(c.baseItem.category.name)) {
-        p.push(c.baseItem.category.name)
-      }
-      return p
-    }, [])
+  generateContributionsByCategory(
+    categories: ICategory[],
+    items: IPlanItem[]
+  ): IChartDetails {
+    const dataLabels: Label[] = categories.map(c => c.name)
     const dataPoints = dataLabels.map(l =>
       items
         .filter(i => i.baseItem.category.name === l)
