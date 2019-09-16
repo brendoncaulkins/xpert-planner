@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms'
+import { MatSlideToggleChange } from '@angular/material'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { map, take, tap } from 'rxjs/operators'
 import { SubSink } from 'subsink'
@@ -17,6 +18,7 @@ interface CategoryPoints {
 @Component({
   selector: 'app-plan',
   templateUrl: './plan.component.html',
+  styleUrls: ['./plan.component.css'],
 })
 export class PlanComponent extends AbstractFormComponent<any>
   implements OnInit, OnDestroy {
@@ -25,6 +27,8 @@ export class PlanComponent extends AbstractFormComponent<any>
 
   totalForecasted$: Observable<number>
   totalEarned$: Observable<number>
+
+  editMode$ = new BehaviorSubject<boolean>(false)
 
   subs = new SubSink()
 
@@ -67,6 +71,10 @@ export class PlanComponent extends AbstractFormComponent<any>
 
   ngOnInit() {
     this.emitFormReady()
+  }
+
+  onModeChange(changeEvent: MatSlideToggleChange) {
+    console.log(changeEvent)
   }
 
   planItemsByCategory(categoryId: number): Observable<IPlanItem[]> {

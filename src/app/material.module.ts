@@ -13,6 +13,7 @@ import {
   MatNativeDateModule,
   MatSelectModule,
   MatSidenavModule,
+  MatSlideToggleModule,
   MatToolbarModule,
 } from '@angular/material'
 
@@ -30,6 +31,7 @@ const materialModules = [
   MatListModule,
   MatSelectModule,
   MatSidenavModule,
+  MatSlideToggleModule,
   MatToolbarModule,
 ]
 
