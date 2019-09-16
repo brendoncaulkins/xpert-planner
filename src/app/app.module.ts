@@ -19,7 +19,8 @@ import { ItemListComponent } from './plan/item-list/item-list.component'
 import { PlanComponent } from './plan/plan.component'
 import { BaseItemService } from './services/base-item/base-item.service'
 import { CategoryService } from './services/category/category.service'
-import { PlanService } from './services/plan/plan.service'
+import { PlanService } from './services/plan/plan.service';
+import { PlanDisplayComponent } from './plan/plan-display/plan-display.component'
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { PlanService } from './services/plan/plan.service'
     ImportPlanComponent,
     ExportPlanComponent,
     OverviewComponent,
+    PlanDisplayComponent,
   ],
   imports: [
     ChartsModule,

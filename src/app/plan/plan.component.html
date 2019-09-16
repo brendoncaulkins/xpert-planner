@@ -4,22 +4,27 @@
       <mat-slide-toggle (change)="editMode$.next($event.checked)" labelPosition="before" fxFlex>Edit</mat-slide-toggle>
     </div>
   </mat-card-header>
-  <mat-card-content>
-    <mat-accordion [multi]="true" *ngIf="editMode$ | async">
-      <mat-expansion-panel *ngFor="let category of categories$ | async; let i = index">
-        <mat-expansion-panel-header class="right-aligned-header">
-          <mat-panel-title>{{ category.name }}</mat-panel-title>
-          <mat-panel-description>{{ getPointsDisplayByIndex(i) | async }}</mat-panel-description>
-        </mat-expansion-panel-header>
-        <app-item-list [initialData]="planItemsByCategory(category.id) | async" [categoryId]="category.id"
-          (formReady)="registerArrayForm(i, $event)" (forecastedPoints$)="setPointsForecasted(i, $event)"
-          (earnedPoints$)="setPointsEarned(i, $event)">
-        </app-item-list>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </mat-card-content>
-  <mat-card-footer class="with-margin-left-30">
-    <h3>Total Forecasted: {{ totalForecasted$ | async }}</h3>
-    <h3>Total Earned: {{ totalEarned$ | async }}</h3>
-  </mat-card-footer>
+  <ng-template *ngIf="editMode$ | async else display">
+    <mat-card-content>
+      <mat-accordion [multi]="true">
+        <mat-expansion-panel *ngFor="let category of categories$ | async; let i = index">
+          <mat-expansion-panel-header class="right-aligned-header">
+            <mat-panel-title>{{ category.name }}</mat-panel-title>
+            <mat-panel-description>{{ getPointsDisplayByIndex(i) | async }}</mat-panel-description>
+          </mat-expansion-panel-header>
+          <app-item-list [initialData]="planItemsByCategory(category.id) | async" [categoryId]="category.id"
+            (formReady)="registerArrayForm(i, $event)" (forecastedPoints$)="setPointsForecasted(i, $event)"
+            (earnedPoints$)="setPointsEarned(i, $event)">
+          </app-item-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+    <mat-card-footer class="with-margin-left-30">
+      <h3>Total Forecasted: {{ totalForecasted$ | async }}</h3>
+      <h3>Total Earned: {{ totalEarned$ | async }}</h3>
+    </mat-card-footer>
+  </ng-template>
+  <ng-template #display>
+    <app-plan-display></app-plan-display>
+  </ng-template>
 </mat-card>

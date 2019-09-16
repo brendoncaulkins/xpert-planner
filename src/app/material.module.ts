@@ -14,6 +14,8 @@ import {
   MatSelectModule,
   MatSidenavModule,
   MatSlideToggleModule,
+  MatSortModule,
+  MatTableModule,
   MatToolbarModule,
 } from '@angular/material'
 
@@ -32,6 +34,8 @@ const materialModules = [
   MatSelectModule,
   MatSidenavModule,
   MatSlideToggleModule,
+  MatSortModule,
+  MatTableModule,
   MatToolbarModule,
 ]
 
