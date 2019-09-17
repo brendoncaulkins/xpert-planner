@@ -4,8 +4,8 @@
       <mat-slide-toggle (change)="editMode$.next($event.checked)" labelPosition="before" fxFlex>Edit</mat-slide-toggle>
     </div>
   </mat-card-header>
-  <ng-template *ngIf="editMode$ | async else display">
-    <mat-card-content>
+  <ng-container *ngIf="(editMode$ | async) else display">
+    <mat-card-content fxLayout="column" fxLayoutGap="10px">
       <mat-accordion [multi]="true">
         <mat-expansion-panel *ngFor="let category of categories$ | async; let i = index">
           <mat-expansion-panel-header class="right-aligned-header">
@@ -18,13 +18,21 @@
           </app-item-list>
         </mat-expansion-panel>
       </mat-accordion>
+      <div fxFlex>
+        <button mat-raised-button color="primary" (click)="onSave()" fxFlexAlign="end">Save</button>
+      </div>
     </mat-card-content>
     <mat-card-footer class="with-margin-left-30">
+      <h3>Total Earned: {{ totalEarned$ | async }} ({{ totalEarnedPastSixMonths$ | async }} in past 6 months)</h3>
       <h3>Total Forecasted: {{ totalForecasted$ | async }}</h3>
-      <h3>Total Earned: {{ totalEarned$ | async }}</h3>
     </mat-card-footer>
-  </ng-template>
+  </ng-container>
   <ng-template #display>
-    <app-plan-display></app-plan-display>
+    <mat-card-content fxLayout="column">
+      <app-completed-table fxFlex [data]="completedItems$ | async"></app-completed-table>
+      <h3>Total Earned: {{ totalEarned$ | async }} ({{ totalEarnedPastSixMonths$ | async }} in past 6 months)</h3>
+      <app-forecasted-table fxFlex [data]="forecastedItems$ | async"></app-forecasted-table>
+      <h3>Total Forecasted: {{ totalForecasted$ | async }}</h3>
+    </mat-card-content>
   </ng-template>
 </mat-card>

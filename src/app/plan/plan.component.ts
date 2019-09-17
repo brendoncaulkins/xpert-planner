@@ -1,9 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms'
-import { MatSlideToggleChange } from '@angular/material'
 import { BehaviorSubject, Observable } from 'rxjs'
-import { map, take, tap } from 'rxjs/operators'
-import { SubSink } from 'subsink'
+import { map, take } from 'rxjs/operators'
 
 import { AbstractFormComponent } from '../abstracts/abstract-form/abstract-form.component'
 import { ICategory, IPlanItem } from '../models/xpert-plan.interface'
@@ -25,12 +23,13 @@ export class PlanComponent extends AbstractFormComponent<any>
   categories$: Observable<ICategory[]>
   categoryPoints$ = new BehaviorSubject<CategoryPoints[]>([])
 
+  completedItems$: Observable<IPlanItem[]>
+  forecastedItems$: Observable<IPlanItem[]>
   totalForecasted$: Observable<number>
   totalEarned$: Observable<number>
+  totalEarnedPastSixMonths$: Observable<number>
 
   editMode$ = new BehaviorSubject<boolean>(false)
-
-  subs = new SubSink()
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,25 +40,32 @@ export class PlanComponent extends AbstractFormComponent<any>
     this.formGroup = this.buildForm()
     this.categories$ = this.categoryService.list
 
-    this.totalForecasted$ = this.categoryPoints$.pipe(
-      map(points =>
-        points.map(p => (p ? p.forecasted : 0)).reduce((p, c, i, ary) => p + c, 0)
-      )
+    // Forecasted data
+    this.forecastedItems$ = this.planService.plan$.pipe(
+      map(items => items.filter(i => !i.completed))
+    )
+    this.totalForecasted$ = this.forecastedItems$.pipe(
+      map(items => items.reduce((p, c) => p + c.points, 0))
     )
 
-    this.totalEarned$ = this.categoryPoints$.pipe(
-      map(points =>
-        points.map(p => (p ? p.earned : 0)).reduce((p, c, i, ary) => p + c, 0)
-      )
+    // Completed data
+    this.completedItems$ = this.planService.plan$.pipe(
+      map(items => items.filter(i => i.completed))
+    )
+    this.totalEarned$ = this.completedItems$.pipe(
+      map(items => items.reduce((p, c) => p + c.points, 0))
     )
 
-    this.subs.add(
-      this.formGroup.valueChanges.subscribe((formData: { plan: IPlanItem[] }) => {
-        const flattenedFormData: IPlanItem[] = formData.plan
-          .reduce((p: IPlanItem[], c: IPlanItem) => p.concat(c), [])
-          .filter((i: IPlanItem) => i.points) // remove unused items
-        this.planService.setPlan(flattenedFormData)
-      })
+    const sixMonthsAgo = new Date()
+    sixMonthsAgo.setDate(1)
+    sixMonthsAgo.setMonth(new Date().getMonth() - 6)
+
+    this.totalEarnedPastSixMonths$ = this.completedItems$.pipe(
+      map(items =>
+        items
+          .filter(i => i.completedOn.getTime() > sixMonthsAgo.getTime())
+          .reduce((p, c) => p + c.points, 0)
+      )
     )
   }
 
@@ -73,8 +79,12 @@ export class PlanComponent extends AbstractFormComponent<any>
     this.emitFormReady()
   }
 
-  onModeChange(changeEvent: MatSlideToggleChange) {
-    console.log(changeEvent)
+  onSave() {
+    const flattenedFormData: IPlanItem[] = this.formGroup.value.plan
+      .reduce((p: IPlanItem[], c: IPlanItem) => p.concat(c), [])
+      .filter((i: IPlanItem) => i.points) // remove unused items
+
+    this.planService.setPlan(flattenedFormData)
   }
 
   planItemsByCategory(categoryId: number): Observable<IPlanItem[]> {
@@ -94,9 +104,7 @@ export class PlanComponent extends AbstractFormComponent<any>
     this.plan.removeAt(index)
   }
 
-  ngOnDestroy() {
-    this.subs.unsubscribe()
-  }
+  ngOnDestroy() {}
 
   setPointsForecasted(index: number, points: number) {
     const currentPoints = this.categoryPoints$.value
