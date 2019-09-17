@@ -1,8 +1,11 @@
+import { CommonModule } from '@angular/common'
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 import { FlexLayoutModule } from '@angular/flex-layout'
-import { MatCardModule, MatTableModule } from '@angular/material'
-import { PlanService } from 'src/app/services/plan/plan.service'
+import { MatCardModule, MatSortModule, MatTableModule } from '@angular/material'
 
+import { PlanService } from '../../services/plan/plan.service'
+import { CompletedTableComponent } from './completed-table/completed-table.component'
+import { ForecastedTableComponent } from './forecasted-table/forecasted-table.component'
 import { PlanDisplayComponent } from './plan-display.component'
 
 describe('PlanDisplayComponent', () => {
@@ -11,8 +14,18 @@ describe('PlanDisplayComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MatTableModule, MatCardModule, FlexLayoutModule],
-      declarations: [PlanDisplayComponent],
+      imports: [
+        CommonModule,
+        FlexLayoutModule,
+        MatTableModule,
+        MatCardModule,
+        MatSortModule,
+      ],
+      declarations: [
+        PlanDisplayComponent,
+        CompletedTableComponent,
+        ForecastedTableComponent,
+      ],
       providers: [PlanService],
     }).compileComponents()
   }))

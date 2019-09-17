@@ -20,7 +20,9 @@ import { PlanComponent } from './plan/plan.component'
 import { BaseItemService } from './services/base-item/base-item.service'
 import { CategoryService } from './services/category/category.service'
 import { PlanService } from './services/plan/plan.service';
-import { PlanDisplayComponent } from './plan/plan-display/plan-display.component'
+import { PlanDisplayComponent } from './plan/plan-display/plan-display.component';
+import { CompletedTableComponent } from './plan/plan-display/completed-table/completed-table.component';
+import { ForecastedTableComponent } from './plan/plan-display/forecasted-table/forecasted-table.component'
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { PlanDisplayComponent } from './plan/plan-display/plan-display.component
     ExportPlanComponent,
     OverviewComponent,
     PlanDisplayComponent,
+    CompletedTableComponent,
+    ForecastedTableComponent,
   ],
   imports: [
     ChartsModule,
