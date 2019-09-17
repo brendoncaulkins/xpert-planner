@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 import { MatCardModule, MatSortModule, MatTableModule } from '@angular/material'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 
 import { CompletedTableComponent } from './completed-table.component'
 
@@ -10,7 +11,13 @@ describe('CompletedTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MatTableModule, MatSortModule, MatCardModule, CommonModule],
+      imports: [
+        CommonModule,
+        MatTableModule,
+        MatSortModule,
+        MatCardModule,
+        NoopAnimationsModule,
+      ],
       declarations: [CompletedTableComponent],
     }).compileComponents()
   }))

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common'
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { MatCardModule, MatSortModule, MatTableModule } from '@angular/material'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 
 import { PlanService } from '../../services/plan/plan.service'
 import { CompletedTableComponent } from './completed-table/completed-table.component'
@@ -20,6 +21,7 @@ describe('PlanDisplayComponent', () => {
         MatTableModule,
         MatCardModule,
         MatSortModule,
+        NoopAnimationsModule,
       ],
       declarations: [
         PlanDisplayComponent,

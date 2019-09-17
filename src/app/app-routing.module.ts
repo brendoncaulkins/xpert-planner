@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
-import { BioFormComponent } from './bio-form/bio-form.component'
 import { ErrorComponent } from './error/error.component'
 import { ExportPlanComponent } from './export-plan/export-plan.component'
 import { ImportPlanComponent } from './import-plan/import-plan.component'
@@ -11,7 +10,6 @@ import { BaseItemService } from './services/base-item/base-item.service'
 import { CategoryService } from './services/category/category.service'
 
 const routes: Routes = [
-  { path: 'bio', component: BioFormComponent },
   {
     path: 'plan',
     component: PlanComponent,

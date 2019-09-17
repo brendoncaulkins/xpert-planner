@@ -41,12 +41,12 @@ export class OverviewComponent implements OnInit {
     this.plan$ = this.planService.plan$
 
     this.contributionsByCategory$ = this.plan$.pipe(
-      withLatestFrom(categoryService.list),
+      withLatestFrom(this.categoryService.list),
       map(([plan, categories]) => this.generateContributionsByCategory(categories, plan))
     )
     this.earnedContributionsByCategory$ = this.plan$.pipe(
       map(plan => plan.filter(item => item.completed)),
-      withLatestFrom(categoryService.list),
+      withLatestFrom(this.categoryService.list),
       map(([plan, categories]) => this.generateContributionsByCategory(categories, plan))
     )
 

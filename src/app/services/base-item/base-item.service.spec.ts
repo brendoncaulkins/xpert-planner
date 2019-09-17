@@ -3,7 +3,11 @@ import { TestBed } from '@angular/core/testing'
 import { BaseItemService } from './base-item.service'
 
 describe('BaseItemService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}))
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      providers: [BaseItemService],
+    })
+  )
 
   it('should be created', () => {
     const service: BaseItemService = TestBed.get(BaseItemService)
