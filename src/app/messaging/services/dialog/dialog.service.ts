@@ -6,8 +6,8 @@ import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmat
 export interface IConfirmation {
   title?: string
   message: string
-  accept: () => any
-  cancel: () => any
+  accept?: () => any
+  cancel?: () => any
 }
 
 export interface IDialogService {
@@ -18,7 +18,7 @@ export interface IDialogService {
 export class DialogService implements IDialogService {
   constructor(private matDialog: MatDialog) {}
 
-  confirm(confirmation: IConfirmation): void {
+  confirm(confirmation: IConfirmation): boolean {
     const metadata = {
       title: confirmation.title ? confirmation.title : 'Confirm',
       message: confirmation.message,
@@ -27,9 +27,14 @@ export class DialogService implements IDialogService {
     dialogRef.afterClosed().subscribe((accepted: boolean) => {
       if (accepted) {
         confirmation.accept()
+        return true
       } else {
         confirmation.cancel()
+        return false
       }
     })
+
+    // Something bad happened...
+    return false
   }
 }

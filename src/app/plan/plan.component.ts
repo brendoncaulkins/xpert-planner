@@ -81,10 +81,14 @@ export class PlanComponent extends AbstractFormComponent<any>
     this.emitFormReady()
   }
 
-  onSave() {
-    const flattenedFormData: IPlanItem[] = this.formGroup.value.plan
+  getFormPlan(): IPlanItem[] {
+    return this.plan.value
       .reduce((p: IPlanItem[], c: IPlanItem) => p.concat(c), [])
       .filter((i: IPlanItem) => i.points) // remove unused items
+  }
+
+  onSave() {
+    const flattenedFormData: IPlanItem[] = this.getFormPlan()
 
     this.planService.setPlan(flattenedFormData)
     this.snackBarService.openSnackBar('Plan saved successfully!')
