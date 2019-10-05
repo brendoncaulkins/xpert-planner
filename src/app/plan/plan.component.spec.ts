@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 
 import { MaterialModule } from '../material.module'
+import { SnackBarService } from '../messaging/services/snack-bar/snack-bar.service'
 import { CategoryService } from '../services/category/category.service'
 import { PlanService } from '../services/plan/plan.service'
 import { CompletedTableComponent } from './completed-table/completed-table.component'
@@ -33,7 +34,7 @@ describe('PlanComponent', () => {
         CompletedTableComponent,
         ForecastedTableComponent,
       ],
-      providers: [CategoryService, PlanService, ItemFormComponent, ItemListComponent],
+      providers: [CategoryService, PlanService, SnackBarService],
     }).compileComponents()
   }))
 

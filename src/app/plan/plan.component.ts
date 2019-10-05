@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs'
 import { map, take } from 'rxjs/operators'
 
 import { AbstractFormComponent } from '../abstracts/abstract-form/abstract-form.component'
+import { SnackBarService } from '../messaging/services/snack-bar/snack-bar.service'
 import { ICategory, IPlanItem } from '../models/xpert-plan.interface'
 import { CategoryService } from '../services/category/category.service'
 import { PlanService } from '../services/plan/plan.service'
@@ -34,7 +35,8 @@ export class PlanComponent extends AbstractFormComponent<any>
   constructor(
     private formBuilder: FormBuilder,
     private categoryService: CategoryService,
-    private planService: PlanService
+    private planService: PlanService,
+    private snackBarService: SnackBarService
   ) {
     super()
     this.formGroup = this.buildForm()
@@ -85,6 +87,7 @@ export class PlanComponent extends AbstractFormComponent<any>
       .filter((i: IPlanItem) => i.points) // remove unused items
 
     this.planService.setPlan(flattenedFormData)
+    this.snackBarService.openSnackBar('Plan saved successfully!')
   }
 
   planItemsByCategory(categoryId: number): Observable<IPlanItem[]> {
