@@ -14,9 +14,11 @@ import {
   MatSelectModule,
   MatSidenavModule,
   MatSlideToggleModule,
+  MatSnackBarModule,
   MatSortModule,
   MatTableModule,
   MatToolbarModule,
+  MatDialogModule,
 } from '@angular/material'
 
 const materialModules = [
@@ -25,6 +27,7 @@ const materialModules = [
   MatCardModule,
   MatCheckboxModule,
   MatDatepickerModule,
+  MatDialogModule,
   MatExpansionModule,
   MatNativeDateModule,
   MatFormFieldModule,
@@ -34,6 +37,7 @@ const materialModules = [
   MatSelectModule,
   MatSidenavModule,
   MatSlideToggleModule,
+  MatSnackBarModule,
   MatSortModule,
   MatTableModule,
   MatToolbarModule,
