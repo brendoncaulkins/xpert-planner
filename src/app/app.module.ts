@@ -12,6 +12,7 @@ import { ExportPlanComponent } from './export-plan/export-plan.component'
 import { HomeComponent } from './home/home.component'
 import { ImportPlanComponent } from './import-plan/import-plan.component'
 import { MaterialModule } from './material.module'
+import { MessagingModule } from './messaging/messaging.module'
 import { OverviewComponent } from './overview/overview.component'
 import { CompletedTableComponent } from './plan/completed-table/completed-table.component'
 import { ForecastedTableComponent } from './plan/forecasted-table/forecasted-table.component'
@@ -42,9 +43,9 @@ import { PlanService } from './services/plan/plan.service'
     BrowserAnimationsModule,
     MaterialModule,
     AppRoutingModule,
-    FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    MessagingModule,
   ],
   providers: [BaseItemService, CategoryService, PlanService],
   bootstrap: [AppComponent],
