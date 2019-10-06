@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { CanDeactivate } from '@angular/router'
-import { Observable } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { Observable, of } from 'rxjs'
+import { map, switchMap } from 'rxjs/operators'
 
 import { DialogService } from '../../messaging/services/dialog/dialog.service'
 import { IPlanItem } from '../../models/xpert-plan.interface'
@@ -15,28 +15,32 @@ export class UnsavedDataGuard implements CanDeactivate<PlanComponent> {
   canDeactivate(component: PlanComponent): Observable<boolean> {
     return this.planService.plan$.pipe(
       map(plan => this.hasUnsavedData(plan, component.getFormPlan())),
-      map(hasUnsaved => (hasUnsaved ? this.doConfirm(component) : true))
+      switchMap(hasUnsaved => (hasUnsaved ? this.doConfirm(component) : of(true)))
     )
   }
 
   hasUnsavedData(plan: IPlanItem[], formData: IPlanItem[]): boolean {
-    console.log(plan, formData)
+    // If formData hasn't been loaded yet,
+    // the user can't have made any changes
+    if (formData.length === 0) {
+      return false
+    }
+
     // Quick check on new/deleted elements
     if (formData.length !== plan.length) {
       return true
     }
 
-    // Changes to existing items, or equal # of adds/deletes
-    formData.forEach(item => {
-      if (!plan.includes(item)) {
-        return true
-      }
-    })
-
-    return false
+    // Look for any differences that haven't been saved
+    // If they're identical, no unsaved data
+    return !this.arrayCompare(plan, formData)
   }
 
-  doConfirm(component: PlanComponent): boolean {
+  arrayCompare(a: any[], b: any[]): boolean {
+    return JSON.stringify(a) === JSON.stringify(b)
+  }
+
+  doConfirm(component: PlanComponent): Observable<boolean> {
     return this.dialogService.confirm({
       message:
         'You have unsaved plan changes.  Would you like to save these changes before leaving?',
