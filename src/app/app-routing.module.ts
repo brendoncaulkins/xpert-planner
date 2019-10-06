@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router'
 
 import { ErrorComponent } from './error/error.component'
 import { ExportPlanComponent } from './export-plan/export-plan.component'
+import { UnsavedDataGuard } from './guards/unsaved-data/unsaved-data.guard'
 import { ImportPlanComponent } from './import-plan/import-plan.component'
 import { OverviewComponent } from './overview/overview.component'
 import { PlanComponent } from './plan/plan.component'
@@ -13,6 +14,7 @@ const routes: Routes = [
   {
     path: 'plan',
     component: PlanComponent,
+    canDeactivate: [UnsavedDataGuard],
     resolve: {
       baseItems: BaseItemService,
       categories: CategoryService,
@@ -33,7 +35,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  providers: [BaseItemService],
+  providers: [BaseItemService, UnsavedDataGuard],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
