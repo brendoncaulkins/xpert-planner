@@ -60,7 +60,7 @@ export class PlanComponent extends AbstractFormComponent<any>
 
     const sixMonthsAgo = new Date()
     sixMonthsAgo.setDate(1)
-    sixMonthsAgo.setMonth(new Date().getMonth() - 6)
+    sixMonthsAgo.setMonth(new Date().getMonth() - 5)
 
     this.totalEarnedPastSixMonths$ = this.completedItems$.pipe(
       map(items =>
