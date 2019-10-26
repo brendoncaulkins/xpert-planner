@@ -30,7 +30,14 @@ export const supportedFileTypes: ISupportedFileType[] = [
   },
 ]
 
-const csvHeader = 'Category,Type,Description,Points,Completed,Completed On'
+const csvColumns = [
+  'Category',
+  'Type',
+  'Description',
+  'Points',
+  'Completed',
+  'Completed On',
+]
 export function exportAsCsv(items: IPlanItem[]): string {
   const rows = items.map(i =>
     [
@@ -42,16 +49,16 @@ export function exportAsCsv(items: IPlanItem[]): string {
       safeDateString(i.completedOn),
     ].join(',')
   )
-  rows.unshift(csvHeader)
+  rows.unshift(csvColumns.join(','))
   return rows.join('\n')
 }
 
 export function importFromCsv(data: string, baseItems: IBasePlanItem[]): IPlanItem[] {
-  const rows = data.split('\n')
-  if (rows[0] === csvHeader) {
+  const rows = data.split(/\r\n|\n\r|\r|\n/)
+  if (csvColumns.every(column => rows[0].includes(column))) {
     rows.splice(0, 1)
   }
-  return rows.map(s => csvToPlanItem(s, baseItems))
+  return rows.filter(r => r.trim().length != 0).map(s => csvToPlanItem(s, baseItems))
 }
 
 function csvToPlanItem(row: string, baseItems: IBasePlanItem[]): IPlanItem {
