@@ -58,7 +58,7 @@ export class OverviewComponent implements OnInit {
     this.pastSixMonthsTotal$ = this.contributionsByMonth$.pipe(
       map(contributions =>
         contributions.data.reduce(
-          (sum: number, n: number, i: number) => (i >= 6 ? sum + n : sum),
+          (sum: number, n: number, i: number) => (i > 6 ? sum + n : sum),
           0
         )
       )
@@ -116,9 +116,12 @@ export class OverviewComponent implements OnInit {
   }
 
   generateContributionsByMonth(items: IPlanItem[]): IChartDetails {
-    const months = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0].map(
-      offset => new Date(new Date().setMonth(new Date().getMonth() - offset))
-    )
+    const months = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0].map(offset => {
+      const monthStart = new Date()
+      monthStart.setMonth(new Date().getMonth() - offset)
+      monthStart.setDate(1)
+      return monthStart
+    })
     const dataLabels: Label[] = months.map(date => [
       this.toMonthAcronym(date.getMonth()),
       date.getFullYear().toString(),
