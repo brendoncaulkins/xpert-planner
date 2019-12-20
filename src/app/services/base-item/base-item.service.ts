@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 
-import { AbstractCrudMockService } from '../../abstracts/abstract-crud-service/abstract-crud.service.mock'
 import { IBasePlanItem } from '../../models/xpert-plan.interface'
+import { AbstractCrudMockService } from '../abstract-crud-service/abstract-crud.service.mock'
 import { dummyBasePlanItems } from '../mock.data'
 
 @Injectable()

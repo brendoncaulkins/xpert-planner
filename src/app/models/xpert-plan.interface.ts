@@ -1,4 +1,4 @@
-import { IBaseItem } from '../abstracts/abstract-crud-service/abstract-crud.service'
+import { IBaseItem } from '../services/abstract-crud-service/abstract-crud.service'
 
 export interface IXpert {
   firstName: string
