@@ -29,6 +29,7 @@ export class PlanComponent extends AbstractFormComponent<any>
   totalForecasted$: Observable<number>
   totalEarned$: Observable<number>
   totalEarnedPastSixMonths$: Observable<number>
+  totalEarnedPastYear$: Observable<number>
 
   editMode$ = new BehaviorSubject<boolean>(false)
 
@@ -61,12 +62,25 @@ export class PlanComponent extends AbstractFormComponent<any>
     const sixMonthsAgo = new Date()
     sixMonthsAgo.setDate(1)
     sixMonthsAgo.setMonth(new Date().getMonth() - 5)
-    console.log(sixMonthsAgo)
+    // console.log(sixMonthsAgo)
 
     this.totalEarnedPastSixMonths$ = this.completedItems$.pipe(
       map(items =>
         items
           .filter(i => i.completedOn.getTime() > sixMonthsAgo.getTime())
+          .reduce((p, c) => p + c.points, 0)
+      )
+    )
+
+    const oneYearAgo = new Date()
+    oneYearAgo.setDate(1)
+    oneYearAgo.setFullYear(new Date().getFullYear() - 1)
+    // console.log(oneYearAgo)
+
+    this.totalEarnedPastYear$ = this.completedItems$.pipe(
+      map(items =>
+        items
+          .filter(i => i.completedOn.getTime() > oneYearAgo.getTime())
           .reduce((p, c) => p + c.points, 0)
       )
     )

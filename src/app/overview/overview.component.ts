@@ -58,7 +58,7 @@ export class OverviewComponent implements OnInit {
     this.pastSixMonthsTotal$ = this.contributionsByMonth$.pipe(
       map(contributions =>
         contributions.data.reduce(
-          (sum: number, n: number, i: number) => (i > 6 ? sum + n : sum),
+          (sum: number, n: number, i: number) => (i >= 6 ? sum + n : sum),
           0
         )
       )
