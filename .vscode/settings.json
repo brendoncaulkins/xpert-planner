@@ -21,7 +21,6 @@
   "prettier.semi": false,
   "prettier.singleQuote": true,
   "prettier.trailingComma": "es5",
-  "prettier.tslintIntegration": true,
   "prettier.disableLanguages": ["html"],
   "beautify.language": {
     "html": ["html"]
@@ -31,6 +30,7 @@
   "peacock.affectTitleBar": false,
   "workbench.colorCustomizations": {
     "activityBar.background": "#d04649",
+    "activityBar.activeBorder": "#37cb34",
     "activityBar.foreground": "#e7e7e7",
     "activityBar.inactiveForeground": "#e7e7e799",
     "activityBarBadge.background": "#37cb34",
@@ -39,5 +39,6 @@
     "statusBarItem.hoverBackground": "#d04649",
     "statusBar.foreground": "#e7e7e7"
   },
-  "ng-evergreen.checkFrequency": "On Load"
+  "ng-evergreen.checkFrequency": "On Load",
+  "peacock.color": "#b52e31"
 }
