@@ -1,0 +1,58 @@
+{
+  "dummyCategories": [{
+      "id": 1,
+      "name": "Writing"
+    },
+    {
+      "id": 2,
+      "name": "Networking"
+    },
+    {
+      "id": 3,
+      "name": "Teaching"
+    }
+  ],
+  "dummyBasePlanItems": [{
+      "id": 1,
+      "category": 1,
+      "type": "Blog Post",
+      "points": 5
+    },
+    {
+      "id": 2,
+      "category": 1,
+      "type": "Whitepaper",
+      "points": 10
+    },
+    {
+      "id": 4,
+      "category": 1,
+      "type": "Publish a book",
+      "points": 1000
+    },
+    {
+      "id": 10,
+      "category": 2,
+      "type": "Organize a networking event",
+      "points": 25
+    },
+    {
+      "id": 11,
+      "category": 2,
+      "type": "Attend a networking event",
+      "points": 2
+    },
+    {
+      "id": 20,
+      "category": 3,
+      "type": "Mentor a team member",
+      "points": 10
+    },
+    {
+      "id": 21,
+      "category": 3,
+      "type": "Lead a teaching session",
+      "points": 10
+    }
+  ]
+}
