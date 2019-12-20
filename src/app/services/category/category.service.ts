@@ -1,15 +1,9 @@
 import { Injectable } from '@angular/core'
 
 import { ICategory } from '../../models/xpert-plan.interface'
-import { AbstractCrudMockService } from '../abstract-crud-service/abstract-crud.service.mock'
-import { dummyCategories } from '../mock.data'
+import { AbstractCrudService } from '../abstract-crud-service/abstract-crud.service'
 
 @Injectable()
-export class CategoryService extends AbstractCrudMockService<ICategory> {
-  mockData = dummyCategories
+export class CategoryService extends AbstractCrudService<ICategory> {
   endpoint = '/category'
-
-  constructor() {
-    super()
-  }
 }
