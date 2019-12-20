@@ -6,7 +6,7 @@ import { dummyBasePlanItems } from '../mock.data'
 
 @Injectable()
 export class MockBaseItemService extends AbstractCrudMockService<IBasePlanItem> {
-  endpoint = '/base-entry'
+  endpoint = '/base-item'
 
   mockData = dummyBasePlanItems
 

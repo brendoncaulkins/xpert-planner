@@ -17,7 +17,6 @@ const routes: Routes = [
     canDeactivate: [UnsavedDataGuard],
     resolve: {
       baseItems: BaseItemService,
-      categories: CategoryService,
     },
   },
   { path: 'overview', component: OverviewComponent },

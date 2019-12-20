@@ -1,8 +1,9 @@
 import { Component } from '@angular/core'
 import { Router } from '@angular/router'
 
-import { IPlanItem } from '../models/xpert-plan.interface'
+import { IBasePlanItem, IPlanItem } from '../models/xpert-plan.interface'
 import { BaseItemService } from '../services/base-item/base-item.service'
+import { CategoryService } from '../services/category/category.service'
 import { PlanService } from '../services/plan/plan.service'
 import { supportedFileTypes } from '../utils/file-conversions'
 

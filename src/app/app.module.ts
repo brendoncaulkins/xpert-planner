@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common'
+import { HttpClientModule } from '@angular/common/http'
 import { NgModule } from '@angular/core'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -46,6 +47,7 @@ import { PlanService } from './services/plan/plan.service'
     ReactiveFormsModule,
     FlexLayoutModule,
     MessagingModule,
+    HttpClientModule,
   ],
   providers: [BaseItemService, CategoryService, PlanService],
   bootstrap: [AppComponent],

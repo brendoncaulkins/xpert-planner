@@ -13,7 +13,8 @@ export interface ICategory extends IBaseItem {
 }
 
 export interface IBasePlanItem extends IBaseItem {
-  category: ICategory
+  categoryId: number
+  category?: ICategory
   type: string
   points: number
 }

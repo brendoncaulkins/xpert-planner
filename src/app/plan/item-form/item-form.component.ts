@@ -35,7 +35,7 @@ export class ItemFormComponent extends AbstractFormComponent<IPlanItem>
     this.formGroup = this.buildForm()
 
     this.items$ = this.baseItemService.list.pipe(
-      map(list => list.filter(item => item.category.id === this.categoryFilter))
+      map(list => list.filter(item => item.categoryId === this.categoryFilter))
     )
 
     this.subs.add(
