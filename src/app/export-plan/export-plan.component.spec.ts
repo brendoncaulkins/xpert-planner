@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { ReactiveFormsModule } from '@angular/forms'
@@ -17,6 +18,7 @@ describe('ExportPlanComponent', () => {
       imports: [
         CommonModule,
         FlexLayoutModule,
+        HttpClientTestingModule,
         MatCardModule,
         MatFormFieldModule,
         MatSelectModule,

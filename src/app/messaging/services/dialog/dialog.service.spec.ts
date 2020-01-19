@@ -52,19 +52,23 @@ describe('DialogService', () => {
         data: { title: confirmation.title, message: confirmation.message },
       })
     })
-    it('should call accept() when accepted', () => {
+    it('should call accept() when accepted', done => {
       spyOn(matDialog, 'open').and.returnValue({
         afterClosed: () => of(true),
       } as MatDialogRef<any>)
-      service.confirm(confirmation)
-      expect(confirmation.accept).toHaveBeenCalled()
+      service.confirm(confirmation).subscribe(() => {
+        expect(confirmation.accept).toHaveBeenCalled()
+        done()
+      })
     })
-    it('should call accept() when accepted', () => {
+    it('should call cancel() when cancelled', done => {
       spyOn(matDialog, 'open').and.returnValue({
         afterClosed: () => of(false),
       } as MatDialogRef<any>)
-      service.confirm(confirmation)
-      expect(confirmation.cancel).toHaveBeenCalled()
+      service.confirm(confirmation).subscribe(() => {
+        expect(confirmation.cancel).toHaveBeenCalled()
+        done()
+      })
     })
   })
 })

@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 import { MatCardModule, MatIconModule } from '@angular/material'
 import { ChartsModule } from 'ng2-charts'
@@ -13,7 +14,13 @@ describe('OverviewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule, MatCardModule, MatIconModule, ChartsModule],
+      imports: [
+        ChartsModule,
+        CommonModule,
+        HttpClientTestingModule,
+        MatCardModule,
+        MatIconModule,
+      ],
       declarations: [OverviewComponent],
       providers: [PlanService, CategoryService],
     }).compileComponents()
