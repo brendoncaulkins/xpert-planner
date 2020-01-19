@@ -11,7 +11,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo()
-    expect(page.getTitleText()).toEqual('Welcome to xpert-plan-sandbox!')
+    expect(page.getTitleText()).toEqual('Welcome to xpert-planner!')
   })
 
   afterEach(async () => {
