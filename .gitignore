@@ -7,6 +7,9 @@
 # Only exists if Bazel was run
 /bazel-out
 
+# JSON server database file
+src/assets/db.json
+
 # dependencies
 /node_modules
 
