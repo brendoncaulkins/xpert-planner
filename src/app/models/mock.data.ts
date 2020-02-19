@@ -32,14 +32,18 @@ export const plan: IPlanItem[] = [
     points: 2,
     description: 'A description',
     completed: true,
-    completedOn: new Date(new Date().setMonth(new Date().getMonth() - 2)),
+    completedOn: new Date(
+      new Date(new Date().setMonth(new Date().getMonth() - 2)).setHours(0, 0, 0, 0)
+    ),
   } as IPlanItem,
   {
     baseItem: baseItems[1],
     points: 5,
     description: 'Another description',
     completed: true,
-    completedOn: new Date(new Date().setMonth(new Date().getMonth() - 5)),
+    completedOn: new Date(
+      new Date(new Date().setMonth(new Date().getMonth() - 5)).setHours(0, 0, 0, 0)
+    ),
   } as IPlanItem,
   {
     baseItem: baseItems[2],

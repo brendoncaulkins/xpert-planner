@@ -30,7 +30,7 @@ export const supportedFileTypes: ISupportedFileType[] = [
   },
 ]
 
-const csvColumns = [
+export const csvColumns = [
   'Category',
   'Type',
   'Description',
@@ -58,7 +58,7 @@ export function importFromCsv(data: string, baseItems: IBasePlanItem[]): IPlanIt
   if (csvColumns.every(column => rows[0].includes(column))) {
     rows.splice(0, 1)
   }
-  return rows.filter(r => r.trim().length != 0).map(s => csvToPlanItem(s, baseItems))
+  return rows.filter(r => r.trim().length !== 0).map(s => csvToPlanItem(s, baseItems))
 }
 
 function csvToPlanItem(row: string, baseItems: IBasePlanItem[]): IPlanItem {
@@ -69,7 +69,10 @@ function csvToPlanItem(row: string, baseItems: IBasePlanItem[]): IPlanItem {
         description: fields[2],
         points: Number.parseInt(fields[3], 10),
         completed: fields[4].toLowerCase() === 'true',
-        completedOn: fields[4].toLowerCase() === 'true' ? new Date(fields[5]) : null,
+        completedOn:
+          fields[4].toLowerCase() === 'true'
+            ? new Date(new Date(fields[5]).setHours(0, 0, 0, 0))
+            : null,
         id: null,
       }
     : null
@@ -97,7 +100,7 @@ export function importFromJson(data: string, baseItems: IBasePlanItem[]): IPlanI
         description: j.description,
         points: j.points,
         completed: j.completed,
-        completedOn: j.completed ? new Date(j.completedOn) : '',
+        completedOn: j.completed ? new Date(j.completedOn) : null,
         id: null,
       } as IPlanItem)
   )
