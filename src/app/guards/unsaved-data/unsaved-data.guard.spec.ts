@@ -1,11 +1,11 @@
 import { TestBed, inject } from '@angular/core/testing'
 import { MatDialogModule } from '@angular/material'
 import { of } from 'rxjs'
-import { PlanComponent } from 'src/app/plan/plan.component'
 
 import { DialogService } from '../../messaging/services/dialog/dialog.service'
 import { plan } from '../../models/mock.data'
 import { IPlanItem } from '../../models/xpert-plan.interface'
+import { PlanComponent } from '../../plan/plan.component'
 import { PlanService } from '../../services/plan/plan.service'
 import { UnsavedDataGuard } from './unsaved-data.guard'
 

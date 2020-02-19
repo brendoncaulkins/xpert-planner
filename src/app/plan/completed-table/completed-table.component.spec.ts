@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common'
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 import { MatCardModule, MatSortModule, MatTableModule } from '@angular/material'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
-import { plan } from 'src/app/models/mock.data'
-import { IPlanItem } from 'src/app/models/xpert-plan.interface'
 
+import { plan } from '../../models/mock.data'
+import { IPlanItem } from '../../models/xpert-plan.interface'
 import { CompletedTableComponent } from './completed-table.component'
 
 describe('CompletedTableComponent', () => {
