@@ -4,10 +4,10 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { ReactiveFormsModule } from '@angular/forms'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
-import { MaterialModule } from 'src/app/material.module'
-import { BaseItemService } from 'src/app/services/base-item/base-item.service'
-import { CategoryService } from 'src/app/services/category/category.service'
 
+import { MaterialModule } from '../../material.module'
+import { BaseItemService } from '../../services/base-item/base-item.service'
+import { CategoryService } from '../../services/category/category.service'
 import { ItemFormComponent } from '../item-form/item-form.component'
 import { ItemListComponent } from './item-list.component'
 

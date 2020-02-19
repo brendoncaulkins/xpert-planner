@@ -3,7 +3,8 @@
 Plan your future and track your success!
 
 ## Status
-[![CircleCI](https://circleci.com/gh/brendoncaulkins/xpert-planner.svg?style=svg&circle-token=3430129b997adb773cc1cdb052d0d9201711875a)](https://circleci.com/gh/brendoncaulkins/xpert-planner)
+
+[![CircleCI](https://circleci.com/gh/brendoncaulkins/xpert-planner.svg?style=svg&circle-token=3430129b997adb773cc1cdb052d0d9201711875a)](https://circleci.com/gh/brendoncaulkins/xpert-planner) [![Coverage Status](https://coveralls.io/repos/github/brendoncaulkins/xpert-planner/badge.svg?branch=master)](https://coveralls.io/github/brendoncaulkins/xpert-planner?branch=master)
 
 ## Development server
 

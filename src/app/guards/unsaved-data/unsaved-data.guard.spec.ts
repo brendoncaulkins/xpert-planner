@@ -1,11 +1,11 @@
-import { TestBed, inject } from '@angular/core/testing'
+import { TestBed } from '@angular/core/testing'
 import { MatDialogModule } from '@angular/material'
 import { of } from 'rxjs'
-import { PlanComponent } from 'src/app/plan/plan.component'
 
 import { DialogService } from '../../messaging/services/dialog/dialog.service'
 import { plan } from '../../models/mock.data'
 import { IPlanItem } from '../../models/xpert-plan.interface'
+import { PlanComponent } from '../../plan/plan.component'
 import { PlanService } from '../../services/plan/plan.service'
 import { UnsavedDataGuard } from './unsaved-data.guard'
 
@@ -76,8 +76,9 @@ describe('UnsavedDataGuard', () => {
       expect(guard.hasUnsavedData(plan, [])).toBe(false)
     })
     it('should return true when the plan and formData are different lengths', () => {
-      plan.push({} as IPlanItem)
-      expect(guard.hasUnsavedData(plan, formData)).toBe(true)
+      const testPlan = [...plan]
+      testPlan.push({} as IPlanItem)
+      expect(guard.hasUnsavedData(testPlan, formData)).toBe(true)
     })
     it('should return true when the plan and formData have different data', () => {
       formData[0].description = 'Updated Description'

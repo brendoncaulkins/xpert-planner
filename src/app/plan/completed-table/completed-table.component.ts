@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core'
 import { MatSort, MatTableDataSource } from '@angular/material'
-import { IPlanItem } from 'src/app/models/xpert-plan.interface'
+
+import { IPlanItem } from '../../models/xpert-plan.interface'
 
 @Component({
   selector: 'app-completed-table',
