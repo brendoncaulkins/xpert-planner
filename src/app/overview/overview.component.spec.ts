@@ -4,8 +4,8 @@ import { MatCardModule, MatIconModule } from '@angular/material'
 import { ChartsModule } from 'ng2-charts'
 import { of } from 'rxjs'
 
-import { categories, plan } from '../models/mock.data'
-import { IBasePlanItem, IPlanItem } from '../models/xpert-plan.interface'
+import { baseItems, categories, plan } from '../models/mock.data'
+import { IPlanItem } from '../models/xpert-plan.interface'
 import { CategoryService } from '../services/category/category.service'
 import { PlanService } from '../services/plan/plan.service'
 import { IChartDetails, OverviewComponent } from './overview.component'
@@ -84,12 +84,7 @@ describe('OverviewComponent', () => {
       const today = new Date()
       const staleDate = new Date(new Date().setFullYear(today.getFullYear() - 2))
       const staleItem = {
-        baseItem: {
-          categoryId: 1,
-          category: { id: 1, name: 'Category 1' },
-          points: 1,
-          type: 'Sample Item',
-        } as IBasePlanItem,
+        baseItem: baseItems[0],
         points: 2,
         description: 'A stale description',
         completed: true,
