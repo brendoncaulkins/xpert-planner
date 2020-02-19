@@ -2,56 +2,13 @@ import { CommonModule } from '@angular/common'
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 import { MatCardModule, MatIconModule } from '@angular/material'
 import { ChartsModule } from 'ng2-charts'
-import { Observable, of } from 'rxjs'
+import { of } from 'rxjs'
 
-import { IBasePlanItem, ICategory, IPlanItem } from '../models/xpert-plan.interface'
+import { categories, plan } from '../models/mock.data'
+import { IBasePlanItem, IPlanItem } from '../models/xpert-plan.interface'
 import { CategoryService } from '../services/category/category.service'
 import { PlanService } from '../services/plan/plan.service'
 import { IChartDetails, OverviewComponent } from './overview.component'
-
-const plan = [
-  {
-    baseItem: {
-      categoryId: 1,
-      category: { id: 1, name: 'Category 1' },
-      points: 1,
-      type: 'Sample Item',
-    } as IBasePlanItem,
-    points: 2,
-    description: 'A description',
-    completed: true,
-    completedOn: new Date(new Date().setMonth(new Date().getMonth() - 2)),
-  } as IPlanItem,
-  {
-    baseItem: {
-      categoryId: 2,
-      category: { id: 2, name: 'Category 2' },
-      points: 5,
-      type: 'Other Sample Item',
-    } as IBasePlanItem,
-    points: 5,
-    description: 'Another description',
-    completed: true,
-    completedOn: new Date(new Date().setMonth(new Date().getMonth() - 5)),
-  } as IPlanItem,
-  {
-    baseItem: {
-      categoryId: 2,
-      category: { id: 2, name: 'Category 2' },
-      points: 3,
-      type: 'A third Item',
-    } as IBasePlanItem,
-    points: 3,
-    description: 'A very long and elaborate description',
-    completed: false,
-    completedOn: null,
-  } as IPlanItem,
-]
-
-const categories = [
-  { id: 1, name: 'Category 1' } as ICategory,
-  { id: 2, name: 'Category 2' } as ICategory,
-]
 
 describe('OverviewComponent', () => {
   let component: OverviewComponent
