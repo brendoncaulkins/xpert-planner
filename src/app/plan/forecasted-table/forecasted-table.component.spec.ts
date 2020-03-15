@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common'
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
-import { MatCardModule, MatSortModule, MatTableModule } from '@angular/material'
+import { MatCardModule } from '@angular/material/card';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 
 import { plan } from '../../models/mock.data'

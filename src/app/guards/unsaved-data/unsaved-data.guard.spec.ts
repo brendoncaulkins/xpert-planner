@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing'
-import { MatDialogModule } from '@angular/material'
+import { MatDialogModule } from '@angular/material/dialog';
 import { of } from 'rxjs'
 
 import { DialogService } from '../../messaging/services/dialog/dialog.service'

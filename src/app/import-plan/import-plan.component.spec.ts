@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 import { FlexLayoutModule } from '@angular/flex-layout'
-import { MatCardModule } from '@angular/material'
+import { MatCardModule } from '@angular/material/card';
 import { RouterTestingModule } from '@angular/router/testing'
 
 import { BaseItemService } from '../services/base-item/base-item.service'
