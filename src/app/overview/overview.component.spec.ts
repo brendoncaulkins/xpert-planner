@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
-import { MatCardModule, MatIconModule } from '@angular/material'
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { ChartsModule } from 'ng2-charts'
 import { of } from 'rxjs'
 

@@ -1,6 +1,7 @@
-import { EventEmitter, Input, OnDestroy, Output } from '@angular/core'
+import { EventEmitter, Input, OnDestroy, Output, Directive } from '@angular/core'
 import { AbstractControl, FormGroup } from '@angular/forms'
 
+@Directive()
 export abstract class AbstractFormComponent<T> implements OnDestroy {
   @Input() data: T
   @Output() formReady: EventEmitter<AbstractControl>
