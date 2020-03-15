@@ -145,7 +145,7 @@ export class PlanComponent extends AbstractFormComponent<any>
       map(points =>
         points[index]
           ? `Forecasted: ${points[index].forecasted}, Earned: ${points[index].earned}`
-          : 'Forecasted: Unknown, Earned: Unknown'
+          : 'Forecasted: 0, Earned: 0'
       )
     )
   }
