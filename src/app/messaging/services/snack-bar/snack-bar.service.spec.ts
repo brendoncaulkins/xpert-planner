@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing'
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { Observer } from 'rxjs'
 
