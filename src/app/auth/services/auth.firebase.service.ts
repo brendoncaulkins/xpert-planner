@@ -54,7 +54,7 @@ export class FirebaseAuthService extends AuthService {
     return {
       isAuthenticated: token.email ? true : false,
       userId: token.sub,
-      userRole: Role.None,
+      userRole: Role.User,
     }
   }
 
@@ -77,7 +77,7 @@ export class FirebaseAuthService extends AuthService {
       picture: firebaseUser.photoURL,
       email: firebaseUser.email,
       _id: firebaseUser.uid,
-      role: Role.None,
+      role: Role.User,
     } as IUser)
   }
 
