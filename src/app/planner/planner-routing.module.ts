@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
-import { HomeComponent } from '../home/home.component'
+import { Role } from '../auth/auth.enum'
+import { AuthGuard } from '../auth/auth.guard'
 import { ExportPlanComponent } from './export-plan/export-plan.component'
 import { UnsavedDataGuard } from './guards/unsaved-data/unsaved-data.guard'
 import { ImportPlanComponent } from './import-plan/import-plan.component'
@@ -14,17 +15,39 @@ const routes: Routes = [
     path: 'plan',
     component: PlanComponent,
     canDeactivate: [UnsavedDataGuard],
+    canActivate: [AuthGuard],
+    data: {
+      expectedRole: Role.User,
+    },
     resolve: {
       baseItems: BaseItemService,
     },
   },
-  { path: 'overview', component: OverviewComponent },
-  { path: 'export', component: ExportPlanComponent },
+  {
+    path: 'overview',
+    component: OverviewComponent,
+    canActivate: [AuthGuard],
+    data: {
+      expectedRole: Role.User,
+    },
+  },
+  {
+    path: 'export',
+    component: ExportPlanComponent,
+    canActivate: [AuthGuard],
+    data: {
+      expectedRole: Role.User,
+    },
+  },
   {
     path: 'import',
     component: ImportPlanComponent,
     resolve: {
       baseItems: BaseItemService,
+    },
+    canActivate: [AuthGuard],
+    data: {
+      expectedRole: Role.User,
     },
   },
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
