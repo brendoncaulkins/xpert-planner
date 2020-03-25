@@ -1,32 +1,30 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-    <mat-toolbar></mat-toolbar>
-    <mat-nav-list *ngIf="isAuthenticated$ | async">
-      <a mat-list-item routerLink="/planner/overview" routerLinkActive="active">Plan Overview</a>
-      <mat-divider></mat-divider>
-      <!-- <a mat-list-item routerLink="/bio" routerLinkActive="active">Xpert Bio</a> -->
-      <a mat-list-item routerLink="/planner/plan" routerLinkActive="active">Xpert Plan</a>
-      <mat-divider></mat-divider>
-      <a mat-list-item routerLink="/planner/export" routerLinkActive="active">Export Plan</a>
-      <a mat-list-item routerLink="/planner/import" routerLinkActive="active">Import Plan</a>
-      <mat-divider></mat-divider>
-      <a mat-list-item routerLink="/logout" routerLinkActive="active">Log out</a>
-    </mat-nav-list>
-    <mat-nav-list *ngIf="!(isAuthenticated$ | async)">
-      <mat-divider></mat-divider>
-      <a mat-list-item routerLink="/login" routerLinkActive="active">Login</a>
-      <mat-divider></mat-divider>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>Xpert Plan Sandbox</span>
-    </mat-toolbar>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
+    <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+        <mat-toolbar></mat-toolbar>
+        <mat-nav-list *ngIf="isAuthenticated$ | async">
+            <a mat-list-item routerLink="/planner/overview" routerLinkActive="active">Plan Overview</a>
+            <mat-divider></mat-divider>
+            <!-- <a mat-list-item routerLink="/bio" routerLinkActive="active">Xpert Bio</a> -->
+            <a mat-list-item routerLink="/planner/plan" routerLinkActive="active">Xpert Plan</a>
+            <mat-divider></mat-divider>
+            <a mat-list-item routerLink="/planner/export" routerLinkActive="active">Export Plan</a>
+            <a mat-list-item routerLink="/planner/import" routerLinkActive="active">Import Plan</a>
+            <mat-divider></mat-divider>
+            <a mat-list-item routerLink="/logout" routerLinkActive="active">Log out</a>
+        </mat-nav-list>
+        <mat-nav-list *ngIf="!(isAuthenticated$ | async)">
+            <mat-divider></mat-divider>
+            <a mat-list-item routerLink="/login" routerLinkActive="active">Login</a>
+            <mat-divider></mat-divider>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <span>Xpert Plan Sandbox</span>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
 </mat-sidenav-container>
