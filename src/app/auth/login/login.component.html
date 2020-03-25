@@ -1,0 +1,18 @@
+<div fxFill fxLayoutAlign="center start">
+    <form [formGroup]="formGroup" (ngSubmit)="login()" class="login-container">
+        <div fxLayoutAlign="center stretch" fxLayout="column" fxLayoutGap="25px" fxFill>
+            <mat-form-field fxFlex>
+                <input matInput placeholder="Email" required [formControl]="email" />
+                <mat-error *ngIf="email.hasError('required')">This field is required</mat-error>
+                <mat-error *ngIf="email.hasError('email')">
+                    Must be a valid email
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex>
+                <input matInput type="password" placeholder="Password" required [formControl]="password" />
+                <mat-error *ngIf="password.hasError('required')">This field is required</mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit">Login!</button>
+        </div>
+    </form>
+</div>

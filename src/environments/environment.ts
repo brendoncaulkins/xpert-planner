@@ -5,6 +5,16 @@
 export const environment = {
   production: false,
   api: 'http://localhost:3000',
+  firebase: {
+    apiKey: '',
+    authDomain: '',
+    databaseURL: '',
+    projectId: '',
+    storageBucket: '',
+    messagingSenderId: '',
+    appId: '',
+    measurementId: '',
+  },
 }
 
 /*

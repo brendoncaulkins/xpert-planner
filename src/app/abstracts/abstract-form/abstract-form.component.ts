@@ -1,4 +1,4 @@
-import { EventEmitter, Input, OnDestroy, Output, Directive } from '@angular/core'
+import { Directive, EventEmitter, Input, OnDestroy, Output } from '@angular/core'
 import { AbstractControl, FormGroup } from '@angular/forms'
 
 @Directive()

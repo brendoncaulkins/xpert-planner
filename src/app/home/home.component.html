@@ -1,14 +1,21 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
         <mat-toolbar></mat-toolbar>
-        <mat-nav-list>
-            <a mat-list-item routerLink="/overview" routerLinkActive="active">Plan Overview</a>
+        <mat-nav-list *ngIf="isAuthenticated$ | async">
+            <a mat-list-item routerLink="/planner/overview" routerLinkActive="active">Plan Overview</a>
             <mat-divider></mat-divider>
             <!-- <a mat-list-item routerLink="/bio" routerLinkActive="active">Xpert Bio</a> -->
-            <a mat-list-item routerLink="/plan" routerLinkActive="active">Xpert Plan</a>
+            <a mat-list-item routerLink="/planner/plan" routerLinkActive="active">Xpert Plan</a>
             <mat-divider></mat-divider>
-            <a mat-list-item routerLink="/export" routerLinkActive="active">Export Plan</a>
-            <a mat-list-item routerLink="/import" routerLinkActive="active">Import Plan</a>
+            <a mat-list-item routerLink="/planner/export" routerLinkActive="active">Export Plan</a>
+            <a mat-list-item routerLink="/planner/import" routerLinkActive="active">Import Plan</a>
+            <mat-divider></mat-divider>
+            <a mat-list-item routerLink="/logout" routerLinkActive="active">Log out</a>
+        </mat-nav-list>
+        <mat-nav-list *ngIf="!(isAuthenticated$ | async)">
+            <mat-divider></mat-divider>
+            <a mat-list-item routerLink="/login" routerLinkActive="active">Login</a>
+            <mat-divider></mat-divider>
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>

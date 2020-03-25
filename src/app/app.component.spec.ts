@@ -4,6 +4,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { RouterTestingModule } from '@angular/router/testing'
 
 import { AppComponent } from './app.component'
+import { AuthService } from './auth/services/auth.service'
+import { AuthServiceFake } from './auth/services/auth.service.fake'
 import { HomeComponent } from './home/home.component'
 import { MaterialModule } from './material.module'
 
@@ -12,6 +14,7 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       declarations: [AppComponent, HomeComponent],
       imports: [CommonModule, MaterialModule, NoopAnimationsModule, RouterTestingModule],
+      providers: [{ provide: AuthService, useClass: AuthServiceFake }],
     }).compileComponents()
   }))
 

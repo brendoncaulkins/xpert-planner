@@ -19,6 +19,7 @@
     "@angular/common": "~9.0.6",
     "@angular/compiler": "~9.0.6",
     "@angular/core": "~9.0.6",
+    "@angular/fire": "^5.4.2",
     "@angular/flex-layout": "^9.0.0-beta.29",
     "@angular/forms": "~9.0.6",
     "@angular/material": "^9.1.2",
@@ -26,7 +27,9 @@
     "@angular/platform-browser-dynamic": "~9.0.6",
     "@angular/router": "~9.0.6",
     "chart.js": "^2.9.3",
+    "firebase": "^7.12.0",
     "json-server": "^0.16.1",
+    "jwt-decode": "^2.2.0",
     "ng2-charts": "^2.3.0",
     "rxjs": "~6.5.4",
     "subsink": "^1.0.1",
@@ -63,7 +66,7 @@
     "protractor": "~5.4.3",
     "ts-node": "~8.6.2",
     "tslint": "~6.1.0",
-    "typescript": "~3.8.3"
+    "typescript": "^3.7.5"
   },
   "importSort": {
     ".ts, .tsx": {

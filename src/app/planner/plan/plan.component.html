@@ -1,0 +1,38 @@
+<mat-card class="with-margin-30">
+    <mat-card-header class="with-margin-bottom-15" fxLayoutAlign="end center">
+        <div>
+            <mat-slide-toggle (change)="editMode$.next($event.checked)" labelPosition="before" fxFlex>Edit</mat-slide-toggle>
+        </div>
+    </mat-card-header>
+    <ng-container *ngIf="(editMode$ | async) else display">
+        <mat-card-content fxLayout="column" fxLayoutGap="10px">
+            <mat-accordion [multi]="true">
+                <mat-expansion-panel *ngFor="let category of categories$ | async; let i = index">
+                    <mat-expansion-panel-header class="right-aligned-header">
+                        <mat-panel-title>{{ category.name }}</mat-panel-title>
+                        <mat-panel-description>{{ getPointsDisplayByIndex(i) | async }}</mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <app-item-list [initialData]="planItemsByCategory(category.id) | async" [categoryId]="category.id" (formReady)="registerArrayForm(i, $event)" (forecastedPoints$)="setPointsForecasted(i, $event)" (earnedPoints$)="setPointsEarned(i, $event)">
+                    </app-item-list>
+                </mat-expansion-panel>
+            </mat-accordion>
+            <div fxFlex>
+                <button mat-raised-button color="primary" (click)="onSave()" fxFlexAlign="end">Save</button>
+            </div>
+        </mat-card-content>
+        <mat-card-footer class="with-margin-left-30">
+            <h3>Total Earned: {{ totalEarned$ | async }} ({{ totalEarnedPastSixMonths$ | async }} in past 6 months,
+                {{ totalEarnedPastYear$ | async}} in past year)</h3>
+            <h3>Total Forecasted: {{ totalForecasted$ | async }}</h3>
+        </mat-card-footer>
+    </ng-container>
+    <ng-template #display>
+        <mat-card-content fxLayout="column">
+            <app-completed-table fxFlex [data]="completedItems$ | async"></app-completed-table>
+            <h3>Total Earned: {{ totalEarned$ | async }} ({{ totalEarnedPastSixMonths$ | async }} in past 6 months,
+                {{ totalEarnedPastYear$ | async}} in past year)</h3>
+            <app-forecasted-table fxFlex [data]="forecastedItems$ | async"></app-forecasted-table>
+            <h3>Total Forecasted: {{ totalForecasted$ | async }}</h3>
+        </mat-card-content>
+    </ng-template>
+</mat-card>
