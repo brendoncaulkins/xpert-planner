@@ -72,13 +72,17 @@ export class ItemFormComponent extends AbstractFormComponent<IPlanItem>
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.data && hasChanged(changes.data)) {
-      this.formGroup.patchValue(this.data)
+    if (this.item && hasChanged(changes.item)) {
+      this.formGroup.patchValue(this.item)
     }
   }
 
   ngOnDestroy() {
     this.destroyForm.emit()
+  }
+
+  compareBaseItems(itemA: IBasePlanItem, itemB: IBasePlanItem) {
+    return itemA.id === itemB.id
   }
 
   /*  GETTERS  */
