@@ -16,6 +16,7 @@ export class HomeComponent {
     .pipe(map(result => result.matches))
 
   isAuthenticated$: Observable<boolean>
+  userEmail$: Observable<string>
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -24,5 +25,7 @@ export class HomeComponent {
     this.isAuthenticated$ = this.authService.authStatus$.pipe(
       map(status => status.isAuthenticated)
     )
+
+    this.userEmail$ = this.authService.currentUser$.pipe(map(user => user.email))
   }
 }
