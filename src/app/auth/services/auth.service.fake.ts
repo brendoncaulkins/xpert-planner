@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable, of } from 'rxjs'
 
-import { IUser } from '../../user/user'
+import { IUser, User } from '../../user/user'
 import { IAuthService, IAuthStatus, defaultAuthStatus } from './auth.service'
 
 @Injectable()
 export class AuthServiceFake implements IAuthService {
-  currentUser$: BehaviorSubject<IUser>
+  currentUser$ = new BehaviorSubject<IUser>(new User())
   authStatus$ = new BehaviorSubject<IAuthStatus>(defaultAuthStatus)
   constructor() {}
 
