@@ -5,4 +5,9 @@
 # Typescript v1 declaration files
 typings/
 
+# installed filed
 node_modules/
+
+# assets folder to protect proprietary data
+src/assets/*
+!src/assets/*.sample.ts
