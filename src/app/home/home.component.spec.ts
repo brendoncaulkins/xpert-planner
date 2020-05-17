@@ -6,6 +6,7 @@ import { filter } from 'rxjs/operators'
 import { AuthService, IAuthStatus } from '../auth/services/auth.service'
 import { AuthServiceFake } from '../auth/services/auth.service.fake'
 import { MaterialModule } from '../material.module'
+import { IUser, User } from '../user/user'
 import { HomeComponent } from './home.component'
 
 describe('HomeComponent', () => {
@@ -26,6 +27,7 @@ describe('HomeComponent', () => {
     component = fixture.componentInstance
     authService = TestBed.inject(AuthService)
     authService.authStatus$.next({} as IAuthStatus)
+    authService.currentUser$.next(new User('1', 'user@test.com'))
     fixture.detectChanges()
   })
 
@@ -47,6 +49,15 @@ describe('HomeComponent', () => {
         done()
       })
       authService.authStatus$.next({ isAuthenticated: false } as IAuthStatus)
+    })
+  })
+
+  describe('userEmail$', () => {
+    it("should return the current user's email", done => {
+      component.userEmail$.subscribe(email => {
+        expect(email).toBe('user@test.com')
+        done()
+      })
     })
   })
 })

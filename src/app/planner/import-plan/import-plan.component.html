@@ -1,7 +1,7 @@
 <mat-card class="solo-mat-card" fxFlex="40" fxFlex.xs="100" fxLayout="column" fxLayoutGap="20px">
-    <mat-card-header>Import Xpert Plan</mat-card-header>
-    <mat-card-content fxFlex="100" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
-        <button mat-raised-button color="primary" (click)="fileUpload.click()">Choose a file...</button>
-        <input id="file-upload" hidden type="file" (change)="onFileSelected()" #fileUpload />
-    </mat-card-content>
+  <mat-card-header>Import Xpert Plan</mat-card-header>
+  <mat-card-content fxFlex="100" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+    <button mat-raised-button color="accent" (click)="fileUpload.click()">Choose a file...</button>
+    <input id="file-upload" hidden type="file" (change)="onFileSelected()" #fileUpload />
+  </mat-card-content>
 </mat-card>

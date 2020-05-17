@@ -15,3 +15,12 @@
   top: 0;
   z-index: 1;
 }
+
+.to-right {
+  text-align: right;
+  margin-right: 50px;
+}
+
+.header-logo {
+  height: 50px;
+}
