@@ -1,11 +1,8 @@
 import * as functions from 'firebase-functions'
 
-import { IBaseItem, ICategory } from './data.models'
-
-// Static data to be served by the Firebase Functions
-
-const categories: ICategory[] = []
-const baseItems: IBaseItem[] = []
+// Import static data from assets folder
+import { baseItems } from './assets/base-item.data'
+import { categories } from './assets/category.data'
 
 // Firebase Functions that serve back the static data
 
