@@ -48,6 +48,7 @@
     "beautify": "0.0.8",
     "codelyzer": "^5.1.2",
     "fake-jwt-sign": "^1.1.1",
+    "firebase-tools": "^8.2.0",
     "import-sort": "^6.0.0",
     "import-sort-cli": "^6.0.0",
     "import-sort-config": "^6.0.0",
