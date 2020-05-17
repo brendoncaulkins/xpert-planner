@@ -1,6 +1,9 @@
+import { AuthMode } from '../app/auth/auth.enum'
+
 export const environment = {
   production: true,
   api: '/api',
+  authMode: AuthMode.FIREBASE,
   firebase: {
     apiKey: '',
     authDomain: '',

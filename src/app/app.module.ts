@@ -13,6 +13,7 @@ import { AppComponent } from './app.component'
 import { AuthGuard } from './auth/auth.guard'
 import { LoginComponent } from './auth/login/login.component'
 import { LogoutComponent } from './auth/logout/logout.component'
+import { authFactory } from './auth/services/auth.factory'
 import { FirebaseAuthService } from './auth/services/auth.firebase.service'
 import { AuthService } from './auth/services/auth.service'
 import { ErrorComponent } from './error/error.component'
@@ -42,8 +43,7 @@ import { MessagingModule } from './messaging/messaging.module'
   ],
   providers: [
     AuthGuard,
-    { provide: AuthService, useClass: FirebaseAuthService },
-    AngularFireAuth,
+    { provide: AuthService, useFactory: authFactory, deps: [AngularFireAuth] },
   ],
   bootstrap: [AppComponent],
 })

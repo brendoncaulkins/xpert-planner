@@ -38,7 +38,8 @@
     "activityBarBadge.foreground": "#15202b",
     "statusBar.background": "#b52e31",
     "statusBarItem.hoverBackground": "#d04649",
-    "statusBar.foreground": "#e7e7e7"
+    "statusBar.foreground": "#e7e7e7",
+    "statusBar.border": "#b52e31"
   },
   "ng-evergreen.checkFrequency": "On Load",
   "peacock.color": "#b52e31"

@@ -4,3 +4,8 @@ export enum Role {
   Manager = 'manager',
   Admin = 'admin',
 }
+
+export enum AuthMode {
+  IN_MEMORY = 'IN_MEMORY',
+  FIREBASE = 'Firebase',
+}
