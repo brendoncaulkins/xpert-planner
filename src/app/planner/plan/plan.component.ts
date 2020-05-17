@@ -102,11 +102,16 @@ export class PlanComponent extends AbstractFormComponent<any>
       .filter((i: IPlanItem) => i.points) // remove unused items
   }
 
-  onSave() {
+  onSave(): boolean {
+    if (this.formGroup.invalid) {
+      this.snackBarService.openSnackBar('Unable to save, invalid data!')
+      return false
+    }
     const flattenedFormData: IPlanItem[] = this.getFormPlan()
 
     this.planService.setPlan(flattenedFormData)
     this.snackBarService.openSnackBar('Plan saved successfully!')
+    return true
   }
 
   planItemsByCategory(categoryId: number): Observable<IPlanItem[]> {
