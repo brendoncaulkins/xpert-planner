@@ -11,3 +11,6 @@ node_modules/
 # assets folder to protect proprietary data
 src/assets/*
 !src/assets/*.sample.ts
+
+#Debugging files
+firebase-debug.log
