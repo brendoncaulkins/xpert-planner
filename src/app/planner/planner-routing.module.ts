@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http'
 import { NgModule } from '@angular/core'
+import { AngularFireFunctions } from '@angular/fire/functions'
 import { RouterModule, Routes } from '@angular/router'
 
 import { Role } from '../auth/auth.enum'
@@ -9,6 +11,8 @@ import { ImportPlanComponent } from './import-plan/import-plan.component'
 import { OverviewComponent } from './overview/overview.component'
 import { PlanComponent } from './plan/plan.component'
 import { BaseItemService } from './services/base-item/base-item.service'
+import { categoryFactory } from './services/category/category.factory'
+import { CategoryService } from './services/category/category.service'
 
 const routes: Routes = [
   {
@@ -55,7 +59,15 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  providers: [BaseItemService, UnsavedDataGuard],
+  providers: [
+    BaseItemService,
+    UnsavedDataGuard,
+    {
+      provide: CategoryService,
+      useFactory: categoryFactory,
+      deps: [HttpClient, AngularFireFunctions],
+    },
+  ],
   exports: [RouterModule],
 })
 export class PlannerRoutingModule {}
