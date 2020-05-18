@@ -1,47 +1,50 @@
 <div class="container">
-    <div *ngIf="!(plan$ | async)?.length; else charts">
-        <mat-card>
-            <mat-card-header>Instructions</mat-card-header>
-            <mat-card-content>
-                <h3 mat-header>Build an Xpert plan!</h3>
-            </mat-card-content>
+  <div *ngIf="!(plan$ | async)?.length; else charts">
+    <mat-card>
+      <mat-card-header>Instructions</mat-card-header>
+      <mat-card-content>
+        <h3 mat-header>Build an Xpert plan!</h3>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <ng-template #charts>
+    <div fxLayout="column" fxLayoutGap="15px">
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px" fxFlex="100">
+        <mat-card *ngIf="contributionsByCategory$ | async as byCategory" fxFlex="49" fxFlex.xs="100">
+          <mat-card-header>All Plan Contributions by Category</mat-card-header>
+          <mat-card-content>
+            <canvas baseChart [data]="byCategory?.data" [labels]="byCategory?.labels" [chartType]="byCategory?.type"
+              [legend]="byCategory?.legend"></canvas>
+          </mat-card-content>
         </mat-card>
+        <mat-card *ngIf="earnedContributionsByCategory$ | async as earned" fxFlex="49" fxFlex.xs="100">
+          <mat-card-header>Earned Plan Contributions by Category</mat-card-header>
+          <mat-card-content>
+            <canvas baseChart [data]="earned?.data" [labels]="earned?.labels" [chartType]="earned?.type"
+              [legend]="earned?.legend"></canvas>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px" fxFlex="100">
+        <mat-card *ngIf="contributionsByMonth$ | async as byMonth" fxFlex="49" fxFlex.xs="100%">
+          <mat-card-header>Plan Contributions by Month</mat-card-header>
+          <mat-card-content>
+            <canvas baseChart [data]="byMonth?.data" [labels]="byMonth?.labels" [chartType]="byMonth?.type"
+              [legend]="byMonth?.legend"></canvas>
+            <div>Points earned in the Past 6 Months: <strong>{{ pastSixMonthsTotal$ | async }}</strong></div>
+            <div>Points earned in the Past Year: <strong>{{ pastYearTotal$ | async }}</strong></div>
+          </mat-card-content>
+        </mat-card>
+        <mat-card *ngIf="status$ | async as status" fxFlex="49" fxFlex.xs="100">
+          <mat-card-header>Completions & Plan Forecasts</mat-card-header>
+          <mat-card-content>
+            <canvas baseChart [data]="status?.data" [labels]="status?.labels" [chartType]="status?.type"
+              [legend]="status?.legend"></canvas>
+            <div><strong>Completed:</strong> Marked as done</div>
+            <div><strong>Forecasted:</strong> Not marked as done</div>
+          </mat-card-content>
+        </mat-card>
+      </div>
     </div>
-    <ng-template #charts>
-        <div fxLayout="column" fxLayoutGap="15px">
-            <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px" fxFlex="100">
-                <mat-card *ngIf="contributionsByCategory$ | async as byCategory" fxFlex="49" fxFlex.xs="100">
-                    <mat-card-header>All Plan Contributions by Category</mat-card-header>
-                    <mat-card-content>
-                        <canvas baseChart [data]="byCategory?.data" [labels]="byCategory?.labels" [chartType]="byCategory?.type" [legend]="byCategory?.legend"></canvas>
-                    </mat-card-content>
-                </mat-card>
-                <mat-card *ngIf="earnedContributionsByCategory$ | async as earned" fxFlex="49" fxFlex.xs="100">
-                    <mat-card-header>Earned Plan Contributions by Category</mat-card-header>
-                    <mat-card-content>
-                        <canvas baseChart [data]="earned?.data" [labels]="earned?.labels" [chartType]="earned?.type" [legend]="earned?.legend"></canvas>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-            <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch" fxLayoutGap="15px" fxFlex="100">
-                <mat-card *ngIf="contributionsByMonth$ | async as byMonth" fxFlex="49" fxFlex.xs="100%">
-                    <mat-card-header>Plan Contributions by Month</mat-card-header>
-                    <mat-card-content>
-                        <canvas baseChart [data]="byMonth?.data" [labels]="byMonth?.labels" [chartType]="byMonth?.type" [legend]="byMonth?.legend"></canvas>
-                        <div>Points earned in the Past 6 Months: <strong>{{ pastSixMonthsTotal$ | async }}</strong></div>
-                        <div>Points earned in the Past Year: <strong>{{ pastYearTotal$ | async }}</strong></div>
-                    </mat-card-content>
-                </mat-card>
-                <mat-card *ngIf="status$ | async as status" fxFlex="49" fxFlex.xs="100">
-                    <mat-card-header>Contributions by Status</mat-card-header>
-                    <mat-card-content>
-                        <canvas baseChart [data]="status?.data" [labels]="status?.labels" [chartType]="status?.type" [legend]="status?.legend"></canvas>
-                        <div><strong>Completed:</strong> Marked as done</div>
-                        <div><strong>Forecasted:</strong> Not marked as done</div>
-                        <div><strong>Stale:</strong> Marked as done over a year ago</div>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-        </div>
-    </ng-template>
+  </ng-template>
 </div>

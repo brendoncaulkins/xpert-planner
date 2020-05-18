@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing'
 import { MatDialogModule } from '@angular/material/dialog'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { of } from 'rxjs'
 
 import { DialogService } from '../../../messaging/services/dialog/dialog.service'
@@ -16,7 +17,7 @@ describe('UnsavedDataGuard', () => {
   beforeEach(() => {
     planService.plan$ = of(plan)
     TestBed.configureTestingModule({
-      imports: [MatDialogModule],
+      imports: [MatDialogModule, NoopAnimationsModule],
       providers: [
         UnsavedDataGuard,
         DialogService,
@@ -99,7 +100,7 @@ describe('UnsavedDataGuard', () => {
       guard = new UnsavedDataGuard(dialogService, planService)
     })
     it('should call the dialogService', () => {
-      spyOn(dialogService, 'confirm')
+      spyOn(dialogService, 'confirm').and.callThrough()
       guard.doConfirm(planComponent)
       expect(dialogService.confirm).toHaveBeenCalled()
     })

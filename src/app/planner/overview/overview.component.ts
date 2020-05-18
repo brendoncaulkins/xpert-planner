@@ -93,17 +93,10 @@ export class OverviewComponent implements OnInit {
   }
 
   generateStatus(items: IPlanItem[]): IChartDetails {
-    const dataLabels: Label[] = ['Completed', 'Forecasted', 'Stale']
+    const dataLabels: Label[] = ['Completed', 'Forecasted']
     const dataPoints = [
-      items
-        .filter(i => !this.isStale(i))
-        .reduce((p: number, c: IPlanItem) => p + (c.completed ? c.points : 0), 0),
-      items
-        .filter(i => !this.isStale(i))
-        .reduce((p: number, c: IPlanItem) => p + (c.completed ? 0 : c.points), 0),
-      items
-        .filter(i => this.isStale(i))
-        .reduce((p: number, c: IPlanItem) => p + c.points, 0),
+      items.reduce((p: number, c: IPlanItem) => p + (c.completed ? c.points : 0), 0),
+      items.reduce((p: number, c: IPlanItem) => p + (c.completed ? 0 : c.points), 0),
     ]
 
     return {
@@ -139,16 +132,6 @@ export class OverviewComponent implements OnInit {
       legend: false,
       options: { responsive: true },
     }
-  }
-
-  isStale(item: IPlanItem): boolean {
-    if (!item.completed) {
-      return false
-    }
-    const staleDate = new Date(
-      new Date(item.completedOn).setFullYear(item.completedOn.getFullYear() + 1)
-    )
-    return new Date(new Date().setHours(0, 0, 0)) > staleDate
   }
 
   toMonthAcronym(month: number): string {

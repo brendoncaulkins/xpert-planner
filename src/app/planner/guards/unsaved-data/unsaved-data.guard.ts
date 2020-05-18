@@ -41,11 +41,20 @@ export class UnsavedDataGuard implements CanDeactivate<PlanComponent> {
   }
 
   doConfirm(component: PlanComponent): Observable<boolean> {
-    return this.dialogService.confirm({
-      message:
-        'You have unsaved plan changes.  Would you like to save these changes before leaving?',
-      accept: () => component.onSave(),
-      cancel: () => {},
-    })
+    return this.dialogService
+      .confirm({
+        message:
+          'You have unsaved plan changes.  Would you like to save these changes before leaving?',
+        accept: () => {}, // can't do the work here, since it doesn't pass results on
+        cancel: () => {},
+      })
+      .pipe(
+        map(accepted => {
+          if (accepted) {
+            return component.onSave()
+          }
+          return false
+        })
+      )
   }
 }
