@@ -78,7 +78,7 @@ describe('OverviewComponent', () => {
     })
 
     it('should use static labels', () => {
-      expect(results.labels).toEqual(['Completed', 'Forecasted', 'Stale'])
+      expect(results.labels).toEqual(['Completed', 'Forecasted'])
     })
     it('should sum the points based on completed and completedOn', () => {
       // Arrange
@@ -91,12 +91,11 @@ describe('OverviewComponent', () => {
         completed: true,
         completedOn: staleDate,
       } as IPlanItem
-      expect(component.isStale(staleItem)).toBe(true)
       const newPlan = [...plan, staleItem]
       // Act
       results = component.generateStatus(newPlan)
       // Assert
-      expect(results.data).toEqual([7, 3, 2])
+      expect(results.data).toEqual([9, 3])
     })
     it('should be a pie chart', () => {
       expect(results.type).toEqual('pie')
@@ -152,28 +151,6 @@ describe('OverviewComponent', () => {
     })
     it('should be responsive', () => {
       expect(results.options).toEqual({ responsive: true })
-    })
-  })
-
-  describe('isStale()', () => {
-    let item: IPlanItem
-    beforeEach(() => {
-      item = { ...plan[0], completed: true }
-    })
-    it('should return false for today', () => {
-      item.completedOn = new Date()
-      expect(component.isStale(item)).toBe(false)
-    })
-    it('should return false for a year ago, today', () => {
-      item.completedOn = new Date(new Date().setFullYear(new Date().getFullYear() - 1))
-      expect(component.isStale(item)).toBe(false)
-    })
-    it('should return true for one year and one day ago', () => {
-      const today = new Date(new Date().setHours(0, 0, 0))
-      const aYearAgo = new Date(today.setFullYear(today.getFullYear() - 1))
-      const aYearAndADayAgo = new Date(aYearAgo.setDate(today.getDate() - 1))
-      item.completedOn = aYearAndADayAgo
-      expect(component.isStale(item)).toBe(true)
     })
   })
 })
