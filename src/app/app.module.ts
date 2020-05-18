@@ -19,6 +19,7 @@ import { ErrorComponent } from './error/error.component'
 import { HomeComponent } from './home/home.component'
 import { MaterialModule } from './material.module'
 import { MessagingModule } from './messaging/messaging.module'
+import { SnackBarService } from './messaging/services/snack-bar/snack-bar.service'
 
 @NgModule({
   declarations: [
@@ -42,7 +43,11 @@ import { MessagingModule } from './messaging/messaging.module'
   ],
   providers: [
     AuthGuard,
-    { provide: AuthService, useFactory: authFactory, deps: [AngularFireAuth] },
+    {
+      provide: AuthService,
+      useFactory: authFactory,
+      deps: [AngularFireAuth, SnackBarService],
+    },
   ],
   bootstrap: [AppComponent],
 })

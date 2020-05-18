@@ -5,6 +5,7 @@ import { catchError, filter, flatMap, map, tap } from 'rxjs/operators'
 
 import { CacheService } from '../../abstracts/services/abstract-cache.service'
 import { transformError } from '../../error/transform-error'
+import { SnackBarService } from '../../messaging/services/snack-bar/snack-bar.service'
 import { IUser, User } from '../../user/user'
 import { Role } from '../auth.enum'
 
@@ -43,7 +44,7 @@ export abstract class AuthService extends CacheService implements IAuthService {
     catchError(transformError)
   )
 
-  constructor() {
+  constructor(protected snackbarService: SnackBarService) {
     super()
 
     if (this.hasExpiredToken()) {
@@ -81,12 +82,16 @@ export abstract class AuthService extends CacheService implements IAuthService {
       catchError(transformError)
     )
 
-    loginResponse$.subscribe({
-      error: err => {
-        this.logout()
-        return throwError(err)
-      },
-    })
+    loginResponse$.subscribe(
+      this.snackbarService.observerFor(
+        'Login',
+        () => {}, // nothing special on login
+        err => {
+          this.logout()
+          return throwError(err)
+        }
+      )
+    )
 
     return loginResponse$
   }

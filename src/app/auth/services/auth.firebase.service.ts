@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth'
 import { User as FirebaseUser } from 'firebase'
 import { Observable, Subject } from 'rxjs'
 import { map } from 'rxjs/operators'
+import { SnackBarService } from 'src/app/messaging/services/snack-bar/snack-bar.service'
 
 import { IUser, User } from '../../user/user'
 import { Role } from '../auth.enum'
@@ -22,8 +23,11 @@ interface IJwtToken {
 
 @Injectable()
 export class FirebaseAuthService extends AuthService {
-  constructor(private afAuth: AngularFireAuth) {
-    super()
+  constructor(
+    private afAuth: AngularFireAuth,
+    protected snackBarService: SnackBarService
+  ) {
+    super(snackBarService)
   }
 
   protected authProvider(
