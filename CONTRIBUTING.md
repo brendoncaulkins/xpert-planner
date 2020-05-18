@@ -32,3 +32,39 @@ We'll try to avoid being super strict about accepting PRs because we value contr
 - Try to make many small commits, with notes, at each step of the way. This will help us understand your thought process when we review the PR. We'll squash these changes at the end of the process, so no worries about being verbose throughout.
 - Similarly, don't worry about pre-squashing your changes for us. We'll use Github's functionality at the end of the PR to do that when accepting it.
 - Before asking for a review or declaring the PR to be ready, make sure the CI build passes. You'll receive updates on this as you go, so the status at any given time should hopefully be clear.
+
+# Development
+
+### Local Development (live reloading)
+
+1. In `src/app/environments/environment.ts`, set `authMode` to `AuthMode.IN_MEMORY`, and ensure `production` is set to `false`
+1. Run `npm run json-server` to start the [json-server](https://www.npmjs.com/package/json-server) powered API. Data is stored in `src/assets/db.json`.
+1. Run `npm start` for the Angular dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+**NOTE:** Because Firebase is wired into the app even when not toggled on, the app will crash if the Firebase modules cannot latch into a real project. Make sure to add your own Firebase credentials in `src/environments/environment.ts`. This will allow the app to run locally.
+
+### Local Development (with Firebase)
+
+1. Configre your Firebase account in `src/environments/environment.ts`.
+1. At the root folder, run `npm run firebase:serve`
+1. Navigate to `http://localhost:5000/`. The app will **NOT** automatically reload.
+
+## Testing
+
+### Unit Tests
+
+1. Run `npm test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+### Code Coverage
+
+1. Run `npm run test:coverage` to run tests with coverage reports (`/coverage`)
+
+## Continuous Integration
+
+The project uses [CircleCI](https://circleci.com/) to check PRs and [Coveralls](https://coveralls.io/) to check that code coverage does not drop. Their respective statuses can be found at the top of the [README](README.md).
+
+## Deployment
+
+### Deploy to Firebase
+
+`npm run firebase:deploy` will compile the app (but not the firebase functions), and then deploy everything to Firebase. Ensure your own Firebase credentials are configured properly in the `src/environments/environment.prod.ts`

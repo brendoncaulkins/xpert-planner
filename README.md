@@ -4,7 +4,7 @@ Plan your future and track your success!
 
 ## Status
 
-| Build status | Code Coverage |
+| Build Status | Code Coverage |
 | ------------ | ------------- |
 | [![CircleCI](https://circleci.com/gh/brendoncaulkins/xpert-planner.svg?style=svg&circle-token=3430129b997adb773cc1cdb052d0d9201711875a)](https://circleci.com/gh/brendoncaulkins/xpert-planner) | [![Coverage Status](https://coveralls.io/repos/github/brendoncaulkins/xpert-planner/badge.svg?branch=master)](https://coveralls.io/github/brendoncaulkins/xpert-planner?branch=master) |
 
@@ -54,29 +54,6 @@ The overview page has four analyses of the plan:
 ## Import/Export Plan
 
 These tabs allow you to save/load your pla from a file. Currently, `.csv` and `.json` are supported. **The plan is not saved inside the application**, so be sure to export once you are done making any changes!
-
-# Development
-
-### Local Development (live reloading)
-
-1. In `src/app/environments/environment.ts`, set `authMode` to `AuthMode.IN_MEMORY`, and ensure `production` is set to `false`
-1. Run `npm run json-server` to start the [json-server](https://www.npmjs.com/package/json-server) powered API. Data is stored in `src/assets/db.json`.
-1. Run `npm start` for the Angular dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-### Local Development (with Firebase)
-
-1. At the root folder, run `npm run firebase:serve`
-1. Navigate to `http://localhost:5000/`. The app will **NOT** automatically reload.
-
-## Testing
-
-### Unit Tests
-
-1. Run `npm test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-### Code Coverage
-
-1. Run `npm run test:coverage` to run tests with coverage reports (`/coverage`)
 
 # Contributing
 
