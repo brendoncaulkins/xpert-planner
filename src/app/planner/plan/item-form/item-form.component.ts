@@ -82,7 +82,7 @@ export class ItemFormComponent extends AbstractFormComponent<IPlanItem>
   }
 
   compareBaseItems(itemA: IBasePlanItem, itemB: IBasePlanItem) {
-    return itemA.id === itemB.id
+    return itemA?.id === itemB?.id
   }
 
   /*  GETTERS  */

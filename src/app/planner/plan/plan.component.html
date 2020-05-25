@@ -1,14 +1,16 @@
 <mat-card class="with-margin-30">
   <mat-card-header class="with-margin-bottom-15" fxLayoutAlign="end center">
     <div>
-      <mat-slide-toggle (change)="editMode$.next($event.checked)" labelPosition="before" fxFlex>Edit</mat-slide-toggle>
+      <mat-checkbox (change)="displayMode$.next($event.checked)" labelPosition="before" fxFlex>Display Mode
+      </mat-checkbox>
     </div>
   </mat-card-header>
-  <ng-container *ngIf="(editMode$ | async) else display">
+  <ng-container *ngIf="!(displayMode$ | async) else display">
     <mat-card-content fxLayout="column" fxLayoutGap="10px">
       <mat-accordion [multi]="true">
-        <mat-expansion-panel *ngFor="let category of categories$ | async; let i = index">
-          <mat-expansion-panel-header class="right-aligned-header">
+        <mat-expansion-panel *ngFor="let category of categories$ | async; let i = index" #panel>
+          <mat-expansion-panel-header class="right-aligned-header"
+            [ngClass]="{'invalid-category': plan?.at(i)?.invalid && plan?.at(i)?.touched && !panel.expanded}">
             <mat-panel-title>{{ category.name }}</mat-panel-title>
             <mat-panel-description>{{ getPointsDisplayByIndex(i) | async }}</mat-panel-description>
           </mat-expansion-panel-header>
@@ -18,8 +20,12 @@
           </app-item-list>
         </mat-expansion-panel>
       </mat-accordion>
-      <div fxFlex>
-        <button mat-raised-button color="accent" (click)="onSave()" fxFlexAlign="end">Save</button>
+      <div fxFlex fxLayoutAlign="start center">
+        <button mat-raised-button color="accent" (click)="onSave()" fxFlexAlign="end" fxShrink>Save</button>
+        <mat-icon fxShrink [color]="plan.invalid ? 'warn' : 'primary'"
+          [matTooltip]="['Each category has 1+ item', 'Each item has Type, Description and Points'] | tooltipList"
+          matTooltipClass="tooltip-list">help
+        </mat-icon>
       </div>
     </mat-card-content>
     <mat-card-footer class="with-margin-left-30">

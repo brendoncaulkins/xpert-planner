@@ -22,3 +22,7 @@ body {
 .solo-mat-card {
   margin: 10px;
 }
+
+.tooltip-list {
+  white-space: pre;
+}
