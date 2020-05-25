@@ -12,6 +12,7 @@ import { MaterialModule } from '../material.module'
 import { ExportPlanComponent } from './export-plan/export-plan.component'
 import { ImportPlanComponent } from './import-plan/import-plan.component'
 import { OverviewComponent } from './overview/overview.component'
+import { TooltipListPipe } from './pipes/tooltip-list/tooltip-list.pipe'
 import { CompletedTableComponent } from './plan/completed-table/completed-table.component'
 import { ForecastedTableComponent } from './plan/forecasted-table/forecasted-table.component'
 import { ItemFormComponent } from './plan/item-form/item-form.component'
@@ -34,6 +35,7 @@ import { PlanService } from './services/plan/plan.service'
     OverviewComponent,
     CompletedTableComponent,
     ForecastedTableComponent,
+    TooltipListPipe,
   ],
   imports: [
     ChartsModule,
@@ -58,6 +60,7 @@ import { PlanService } from './services/plan/plan.service'
       deps: [HttpClient, AngularFireFunctions],
     },
     PlanService,
+    TooltipListPipe,
   ],
 })
 export class PlannerModule {}

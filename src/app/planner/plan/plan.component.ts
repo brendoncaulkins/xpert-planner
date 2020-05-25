@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms'
 import { BehaviorSubject, Observable } from 'rxjs'
-import { map, take } from 'rxjs/operators'
+import { map, take, tap } from 'rxjs/operators'
 
 import { AbstractFormComponent } from '../../abstracts/abstract-form/abstract-form.component'
 import { SnackBarService } from '../../messaging/services/snack-bar/snack-bar.service'
+import { plan } from '../models/mock.data'
 import { ICategory, IPlanItem } from '../models/xpert-plan.interface'
 import { CategoryService } from '../services/category/category.service'
 import { PlanService } from '../services/plan/plan.service'
@@ -31,7 +32,7 @@ export class PlanComponent extends AbstractFormComponent<any>
   totalEarnedPastSixMonths$: Observable<number>
   totalEarnedPastYear$: Observable<number>
 
-  editMode$ = new BehaviorSubject<boolean>(false)
+  displayMode$ = new BehaviorSubject<boolean>(false)
 
   constructor(
     private formBuilder: FormBuilder,
@@ -104,6 +105,7 @@ export class PlanComponent extends AbstractFormComponent<any>
 
   onSave(): boolean {
     if (this.formGroup.invalid) {
+      this.formGroup.markAllAsTouched()
       this.snackBarService.openSnackBar('Unable to save, invalid data!')
       return false
     }

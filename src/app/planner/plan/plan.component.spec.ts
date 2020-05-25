@@ -9,6 +9,7 @@ import { MaterialModule } from '../../material.module'
 import { SnackBarService } from '../../messaging/services/snack-bar/snack-bar.service'
 import { baseItems, categories, plan } from '../models/mock.data'
 import { IPlanItem } from '../models/xpert-plan.interface'
+import { TooltipListPipe } from '../pipes/tooltip-list/tooltip-list.pipe'
 import { BaseItemService } from '../services/base-item/base-item.service'
 import { CategoryService } from '../services/category/category.service'
 import { PlanService } from '../services/plan/plan.service'
@@ -44,12 +45,14 @@ describe('PlanComponent', () => {
         ItemListComponent,
         CompletedTableComponent,
         ForecastedTableComponent,
+        TooltipListPipe,
       ],
       providers: [
         { provide: CategoryService, useValue: categoryService },
         { provide: PlanService, useValue: planService },
         { provide: BaseItemService, useValue: baseItemService },
         SnackBarService,
+        TooltipListPipe,
       ],
     }).compileComponents()
   }))
@@ -65,15 +68,15 @@ describe('PlanComponent', () => {
   })
 
   // This is such a cheat
-  it('should work in editMode', async () => {
-    component.editMode$.next(true)
+  it('should work in displayMode', async () => {
+    component.displayMode$.next(true)
     await fixture.detectChanges()
     expect(component).toBeTruthy()
   })
 
   describe('onSave()', () => {
     beforeEach(async () => {
-      component.editMode$.next(true)
+      component.displayMode$.next(true)
       await fixture.detectChanges()
     })
     it('should call PlanService.setPlan', () => {
