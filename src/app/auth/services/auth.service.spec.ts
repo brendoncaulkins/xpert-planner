@@ -1,5 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing'
-import { TestBed, inject } from '@angular/core/testing'
+import { TestBed } from '@angular/core/testing'
 import { MessagingModule } from 'src/app/messaging/messaging.module'
 
 import { InMemoryAuthService } from './auth.inmemory.service'
