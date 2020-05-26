@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core'
 import { AngularFireAuth } from '@angular/fire/auth'
 import { User as FirebaseUser } from 'firebase'
-import { Observable, Subject } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { Observable, Subject, from, of } from 'rxjs'
+import { catchError, filter, map, switchMap, tap } from 'rxjs/operators'
 import { SnackBarService } from 'src/app/messaging/services/snack-bar/snack-bar.service'
 
 import { IUser, User } from '../../user/user'
@@ -91,5 +91,22 @@ export class FirebaseAuthService extends AuthService {
     }
     this.clearToken()
     this.authStatus$.next(defaultAuthStatus)
+  }
+
+  register(email: string, password: string): Observable<void> {
+    const registrationSubject$ = new Subject<void>()
+    this.afAuth.auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        this.snackBarService.openSnackBar(`Registration for ${email} successful!`)
+        registrationSubject$.next()
+      })
+      .catch(() => {
+        const message = `Registration for ${email} failed!`
+        this.snackBarService.openSnackBar(message)
+        registrationSubject$.error(message)
+      })
+
+    return registrationSubject$
   }
 }

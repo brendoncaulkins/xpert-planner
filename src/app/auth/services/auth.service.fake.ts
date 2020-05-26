@@ -19,4 +19,8 @@ export class AuthServiceFake implements IAuthService {
   getToken(): string {
     return ''
   }
+
+  register(email: string, password: string): Observable<void> {
+    return this.login(email, password)
+  }
 }
