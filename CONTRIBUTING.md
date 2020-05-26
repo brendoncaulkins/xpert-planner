@@ -41,7 +41,7 @@ We'll try to avoid being super strict about accepting PRs because we value contr
 1. Run `npm run json-server` to start the [json-server](https://www.npmjs.com/package/json-server) powered API. Data is stored in `src/assets/db.json`.
 1. Run `npm start` for the Angular dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-**NOTE:** Because Firebase is wired into the app even when not toggled on, the app will crash if the Firebase modules cannot latch into a real project. Make sure to add your own Firebase credentials in `src/environments/firebase.config.ts`. This will allow the app to run locally. You can find a sample file (`firebase.config.sample.ts`), and the format is identical to what firebase provides.
+**NOTE:** Because Firebase is wired into the app even when not toggled on, the app will crash if the Firebase modules cannot latch into a real project. Make sure to add your own Firebase credentials in `src/environments/firebase.config.ts`. This will allow the app to run locally. A sample file is provided, and the format is identical to what firebase provides.
 
 ### Local Development (with Firebase)
 
