@@ -19,7 +19,8 @@ import { ErrorComponent } from './error/error.component'
 import { HomeComponent } from './home/home.component'
 import { MaterialModule } from './material.module'
 import { MessagingModule } from './messaging/messaging.module'
-import { SnackBarService } from './messaging/services/snack-bar/snack-bar.service'
+import { SnackBarService } from './messaging/services/snack-bar/snack-bar.service';
+import { RegisterComponent } from './auth/register/register.component'
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SnackBarService } from './messaging/services/snack-bar/snack-bar.servic
     HomeComponent,
     LoginComponent,
     LogoutComponent,
+    RegisterComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

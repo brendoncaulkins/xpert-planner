@@ -4,9 +4,11 @@ import { RouterModule, Routes } from '@angular/router'
 import { AuthGuard } from './auth/auth.guard'
 import { LoginComponent } from './auth/login/login.component'
 import { LogoutComponent } from './auth/logout/logout.component'
+import { RegisterComponent } from './auth/register/register.component'
 import { ErrorComponent } from './error/error.component'
 
 const routes: Routes = [
+  { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'login/:redirectUrl', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },

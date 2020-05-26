@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import { sign } from 'fake-jwt-sign' // For InMemoryAuthService only
 import { Observable, of, throwError } from 'rxjs'
+import { map } from 'rxjs/operators'
 
 import { SnackBarService } from '../../messaging/services/snack-bar/snack-bar.service'
 import { PhoneType, User } from '../../user/user'
@@ -77,5 +78,10 @@ export class InMemoryAuthService extends AuthService {
 
   protected getCurrentUser(): Observable<User> {
     return of(this.defaultUser)
+  }
+
+  register(email: string, password: string): Observable<void> {
+    console.log('Regsitered ', email)
+    return this.login(email, password)
   }
 }

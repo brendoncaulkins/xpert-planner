@@ -3,21 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 import { AuthMode } from '../app/auth/auth.enum'
+import { firebase } from './firebase.config'
 
 export const environment = {
   production: false,
   api: 'http://localhost:3000',
   authMode: AuthMode.IN_MEMORY,
-  firebase: {
-    apiKey: '',
-    authDomain: '',
-    databaseURL: '',
-    projectId: '',
-    storageBucket: '',
-    messagingSenderId: '',
-    appId: '',
-    measurementId: '',
-  },
+  firebase,
 }
 
 /*

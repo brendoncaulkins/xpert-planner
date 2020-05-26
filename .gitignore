@@ -11,6 +11,9 @@
 # JSON server database file
 src/assets/db.json
 
+# secrets
+src/environments/firebase.config.ts
+
 # dependencies
 /node_modules
 

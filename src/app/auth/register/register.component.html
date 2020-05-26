@@ -1,0 +1,44 @@
+<div fxFill fxLayoutAlign="center start">
+  <form [formGroup]="formGroup" (ngSubmit)="register()" class="form-container">
+    <div fxLayoutAlign="center stretch" fxLayout="column" fxLayoutGap="25px" fxFill>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Email" required [formControl]="email" />
+        <mat-error *ngIf="email.hasError('required')">This field is required</mat-error>
+        <mat-error *ngIf="email.hasError('email')">
+          Must be a valid email
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput type="password" placeholder="Password" required [formControl]="password" />
+        <mat-error *ngIf="password.hasError('required')">This field is required</mat-error>
+        <mat-error *ngIf="password.hasError('password') && !password.hasError('required')">Password does not meet
+          strength requirements (below).
+        </mat-error>
+      </mat-form-field>
+      <div fxFlex>
+        Password Strength:
+        <ul>
+          <li class="password-requirement" [ngClass]="{'pass': pwdHasMinLength$ | async}">
+            Length: 8+ characters
+          </li>
+          <li class="password-requirement" [ngClass]="{'pass': pwdHasLower$ | async}">
+            Lowercase character
+          </li>
+          <li class="password-requirement" [ngClass]="{'pass': pwdHasUpper$ | async}">
+            Uppercase character
+          </li>
+          <li class="password-requirement" [ngClass]="{'pass': pwdHasNumber$ | async}">
+            Number
+          </li>
+        </ul>
+      </div>
+      <mat-form-field fxFlex>
+        <input matInput type="password" placeholder="Confirm Password" required [formControl]="confirmPassword" />
+        <mat-error *ngIf="confirmPassword.hasError('required')">This field is required</mat-error>
+        <mat-error *ngIf="confirmPassword.hasError('confirm') && !confirmPassword.hasError('required')">Passwords must
+          match!</mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="accent" type="submit" [disabled]="formGroup.invalid">Register!</button>
+    </div>
+  </form>
+</div>

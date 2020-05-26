@@ -15,6 +15,7 @@ export interface IAuthService {
   login(email: string, password: string): Observable<void>
   logout(clearToken: boolean): void
   getToken(): string
+  register(email: string, password: string): Observable<void>
 }
 
 export interface IAuthStatus {
@@ -65,6 +66,8 @@ export abstract class AuthService extends CacheService implements IAuthService {
   protected abstract transformJwtToken(token: unknown): IAuthStatus
 
   protected abstract getCurrentUser(): Observable<User>
+
+  abstract register(email: string, password: string): Observable<void>
 
   login(email: string, password: string): Observable<void> {
     this.clearToken()

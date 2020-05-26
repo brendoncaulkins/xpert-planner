@@ -14,6 +14,10 @@ import { AuthService } from '../services/auth.service'
         width: 50%;
         min-width: 200px;
       }
+
+      .subtle {
+        color: grey;
+      }
     `,
   ],
 })
