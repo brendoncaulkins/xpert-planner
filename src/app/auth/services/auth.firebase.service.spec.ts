@@ -13,7 +13,11 @@ import { FirebaseAuthService } from './auth.firebase.service'
 
 const angularFireStub = {
   user: jasmine.createSpyObj('user', ['subscribe']),
-  auth: jasmine.createSpyObj('auth', ['signInWithEmailAndPassword', 'signOut']),
+  auth: jasmine.createSpyObj('auth', [
+    'signInWithEmailAndPassword',
+    'createUserWithEmailAndPassword',
+    'signOut',
+  ]),
 }
 
 // {
@@ -93,6 +97,36 @@ describe('FirebaseAuthService', () => {
       expect(user.picture).toBe(firebaseUser.photoURL)
       expect(user.role).toBe(Role.User)
       expect(user._id).toBe(firebaseUser.uid)
+    })
+  })
+
+  describe('register', () => {
+    it('should register with email and password', done => {
+      angularFireStub.auth.createUserWithEmailAndPassword.and.returnValue(
+        Promise.resolve({ user: mockUser })
+      )
+      service.register('user@test.com', 'password').subscribe(() => {
+        expect(angularFireStub.auth.createUserWithEmailAndPassword).toHaveBeenCalledWith(
+          'user@test.com',
+          'password'
+        )
+        done()
+      })
+    })
+
+    it('should pass error on failure', done => {
+      angularFireStub.auth.createUserWithEmailAndPassword.and.returnValue(
+        Promise.reject()
+      )
+      service.register('user@test.com', 'password').subscribe({
+        next: () => {}, // should fail with timeout
+        error: () => {
+          expect(
+            angularFireStub.auth.createUserWithEmailAndPassword
+          ).toHaveBeenCalledWith('user@test.com', 'password')
+          done()
+        },
+      })
     })
   })
 })

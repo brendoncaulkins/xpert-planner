@@ -76,7 +76,7 @@ export class RegisterComponent implements OnDestroy {
     return (control: AbstractControl) => {
       const pwd = control.value
       if (!this.hasMinCharLength(pwd, length)) {
-        return { password: `Does not meet minimum length (${length})` }
+        return { password: `Does not meet minimum length (${length}).` }
       }
       if (!this.hasUppercaseLetter(pwd)) {
         return { password: `Does not have an Uppercase letter.` }
@@ -121,10 +121,13 @@ export class RegisterComponent implements OnDestroy {
   register() {
     const email = this.email.value
     const password = this.password.value
-    this.authService
-      .register(email, password)
-      .pipe(switchMap(() => this.authService.login(email, password)))
-      .subscribe(() => this.router.navigate(['/', 'planner']))
+
+    this.subs.add(
+      this.authService
+        .register(email, password)
+        .pipe(switchMap(() => this.authService.login(email, password)))
+        .subscribe(() => this.router.navigate(['/', 'planner']))
+    )
   }
 
   get email(): AbstractControl {
