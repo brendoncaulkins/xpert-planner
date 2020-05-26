@@ -14,9 +14,9 @@
       <a mat-list-item routerLink="/logout" routerLinkActive="active">Log out</a>
     </mat-nav-list>
     <mat-nav-list *ngIf="!(isAuthenticated$ | async)">
+      <a mat-list-item routerLink="/register" routerLinkActive="active">Register</a>
       <mat-divider></mat-divider>
       <a mat-list-item routerLink="/login" routerLinkActive="active">Login</a>
-      <mat-divider></mat-divider>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
