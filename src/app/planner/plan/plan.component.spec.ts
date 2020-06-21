@@ -13,10 +13,9 @@ import { TooltipListPipe } from '../pipes/tooltip-list/tooltip-list.pipe'
 import { BaseItemService } from '../services/base-item/base-item.service'
 import { CategoryService } from '../services/category/category.service'
 import { PlanService } from '../services/plan/plan.service'
-import { CompletedTableComponent } from './completed-table/completed-table.component'
-import { ForecastedTableComponent } from './forecasted-table/forecasted-table.component'
 import { ItemFormComponent } from './item-form/item-form.component'
 import { ItemListComponent } from './item-list/item-list.component'
+import { ItemTableComponent } from './item-table/item-table.component'
 import { PlanComponent } from './plan.component'
 
 describe('PlanComponent', () => {
@@ -43,8 +42,7 @@ describe('PlanComponent', () => {
         PlanComponent,
         ItemFormComponent,
         ItemListComponent,
-        CompletedTableComponent,
-        ForecastedTableComponent,
+        ItemTableComponent,
         TooltipListPipe,
       ],
       providers: [
