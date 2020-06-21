@@ -1,16 +1,17 @@
 <div fxLayout="column">
-    <div fxFlex="100%" *ngFor="let item of itemList; let i = index">
-        <app-item-form [item]="item" [categoryFilter]="categoryId" fxFlex="95%" (formReady)="registerArrayForm('categoryPlan', i, $event)" (destroyForm)="deregisterArrayForm(i)">
-        </app-item-form>
-        <div fxLayoutAlign="center center" fxFlex="5%" fxAlign="end">
-            <button mat-raised-button color="warn" (click)="onDelete(i)" *ngIf="plan.length > 1">
-                <mat-icon>clear</mat-icon>
-            </button>
-        </div>
+  <div fxFlex="100%" *ngFor="let item of itemList; let i = index">
+    <app-item-form [item]="item" [categoryFilter]="categoryId" fxFlex="95%" (formReady)="registerArrayForm(i, $event)"
+      (destroyForm)="deregisterArrayForm(i)">
+    </app-item-form>
+    <div fxLayoutAlign="center center" fxFlex="5%" fxAlign="end">
+      <button mat-raised-button color="warn" (click)="onDelete(i)" *ngIf="plan.length > 1">
+        <mat-icon>clear</mat-icon>
+      </button>
     </div>
-    <div>
-        <button mat-raised-button color="primary" value="add plan item" [disabled]="plan.invalid" (click)="onAddItem()">
-            Add Item
-        </button>
-    </div>
+  </div>
+  <div>
+    <button mat-raised-button color="primary" value="add plan item" [disabled]="plan.invalid" (click)="onAddItem()">
+      Add Item
+    </button>
+  </div>
 </div>
