@@ -126,7 +126,7 @@ export class RegisterComponent implements OnDestroy {
       this.authService
         .register(email, password)
         .pipe(switchMap(() => this.authService.login(email, password)))
-        .subscribe(() => this.router.navigate(['/', 'planner']))
+        .subscribe(() => this.router.navigate(['/', 'planner', 'plan']))
     )
   }
 
