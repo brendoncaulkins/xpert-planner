@@ -7,11 +7,11 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 
 import { plan } from '../../models/mock.data'
 import { IPlanItem } from '../../models/xpert-plan.interface'
-import { ForecastedTableComponent } from './forecasted-table.component'
+import { ItemTableComponent } from './item-table.component'
 
-describe('ForecastedTableComponent', () => {
-  let component: ForecastedTableComponent
-  let fixture: ComponentFixture<ForecastedTableComponent>
+describe('ItemTableComponent', () => {
+  let component: ItemTableComponent
+  let fixture: ComponentFixture<ItemTableComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -22,12 +22,12 @@ describe('ForecastedTableComponent', () => {
         MatCardModule,
         NoopAnimationsModule,
       ],
-      declarations: [ForecastedTableComponent],
+      declarations: [ItemTableComponent],
     }).compileComponents()
   }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ForecastedTableComponent)
+    fixture = TestBed.createComponent(ItemTableComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })
@@ -49,6 +49,11 @@ describe('ForecastedTableComponent', () => {
     })
     it('should use the item type name when sorting by type', () => {
       expect(component.sortAccessor(item, 'base-item')).toEqual(item.baseItem.type)
+    })
+    it('should use completedOn name when sorting by completion Date', () => {
+      expect(component.sortAccessor(item, 'completion-date')).toEqual(
+        item.completedOn.getTime()
+      )
     })
     it('should default to the prop name as given', () => {
       expect(component.sortAccessor(item, 'points')).toBe(item.points)

@@ -45,11 +45,11 @@ export class ItemListComponent extends AbstractFormComponent<IPlanItem[]>
 
   ngOnInit() {
     this.itemList = this.initialData.length > 0 ? this.initialData : this.itemList
-    this.plan.patchValue(this.itemList)
+    this.plan.patchValue(this.itemList, { onlySelf: true, emitEvent: false })
     this.emitFormReady(this.plan)
   }
 
-  registerArrayForm(name: string, index: number, control: AbstractControl): void {
+  registerArrayForm(index: number, control: AbstractControl): void {
     this.plan.setControl(index, control)
   }
 

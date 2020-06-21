@@ -5,16 +5,17 @@ import { MatTableDataSource } from '@angular/material/table'
 import { IPlanItem } from '../../models/xpert-plan.interface'
 
 @Component({
-  selector: 'app-completed-table',
-  templateUrl: './completed-table.component.html',
+  selector: 'app-item-table',
+  templateUrl: './item-table.component.html',
   styles: [],
 })
-export class CompletedTableComponent implements OnInit, OnChanges {
+export class ItemTableComponent implements OnInit, OnChanges {
   @Input() data: IPlanItem[]
+  @Input() tableTitle: string
+  @Input() columns = ['category', 'base-item', 'description', 'points', 'completion-date']
 
   @ViewChild(MatSort, { static: true }) sorter: MatSort
 
-  columns = ['category', 'base-item', 'description', 'points', 'completion-date']
   dataSource: MatTableDataSource<IPlanItem>
 
   constructor() {

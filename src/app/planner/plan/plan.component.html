@@ -36,10 +36,12 @@
   </ng-container>
   <ng-template #display>
     <mat-card-content fxLayout="column">
-      <app-completed-table fxFlex [data]="completedItems$ | async"></app-completed-table>
+      <app-item-table fxFlex [data]="completedItems$ | async" tableTitle="Completed Items"></app-item-table>
       <h3>Total Earned: {{ totalEarned$ | async }} ({{ totalEarnedPastSixMonths$ | async }} in past 6 months,
         {{ totalEarnedPastYear$ | async}} in past year)</h3>
-      <app-forecasted-table fxFlex [data]="forecastedItems$ | async"></app-forecasted-table>
+      <app-item-table fxFlex [data]="forecastedItems$ | async" tableTitle="Forecasted Items"
+        [columns]="['category', 'base-item', 'description', 'points']">
+      </app-item-table>
       <h3>Total Forecasted: {{ totalForecasted$ | async }}</h3>
     </mat-card-content>
   </ng-template>

@@ -5,7 +5,6 @@ import { map, take, tap } from 'rxjs/operators'
 
 import { AbstractFormComponent } from '../../abstracts/abstract-form/abstract-form.component'
 import { SnackBarService } from '../../messaging/services/snack-bar/snack-bar.service'
-import { plan } from '../models/mock.data'
 import { ICategory, IPlanItem } from '../models/xpert-plan.interface'
 import { CategoryService } from '../services/category/category.service'
 import { PlanService } from '../services/plan/plan.service'
@@ -118,8 +117,8 @@ export class PlanComponent extends AbstractFormComponent<any>
 
   planItemsByCategory(categoryId: number): Observable<IPlanItem[]> {
     return this.planService.plan$.pipe(
-      map(plan =>
-        plan.filter(i => (i.baseItem ? i.baseItem.category.id === categoryId : false))
+      map(p =>
+        p.filter(i => (i.baseItem ? i.baseItem.category.id === categoryId : false))
       ),
       take(1)
     )
