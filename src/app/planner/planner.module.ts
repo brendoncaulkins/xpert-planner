@@ -13,10 +13,9 @@ import { ExportPlanComponent } from './export-plan/export-plan.component'
 import { ImportPlanComponent } from './import-plan/import-plan.component'
 import { OverviewComponent } from './overview/overview.component'
 import { TooltipListPipe } from './pipes/tooltip-list/tooltip-list.pipe'
-import { CompletedTableComponent } from './plan/completed-table/completed-table.component'
-import { ForecastedTableComponent } from './plan/forecasted-table/forecasted-table.component'
 import { ItemFormComponent } from './plan/item-form/item-form.component'
 import { ItemListComponent } from './plan/item-list/item-list.component'
+import { ItemTableComponent } from './plan/item-table/item-table.component'
 import { PlanComponent } from './plan/plan.component'
 import { PlannerRoutingModule } from './planner-routing.module'
 import { baseItemFactory } from './services/base-item/base-item.factory'
@@ -33,9 +32,8 @@ import { PlanService } from './services/plan/plan.service'
     ImportPlanComponent,
     ExportPlanComponent,
     OverviewComponent,
-    CompletedTableComponent,
-    ForecastedTableComponent,
     TooltipListPipe,
+    ItemTableComponent,
   ],
   imports: [
     ChartsModule,
